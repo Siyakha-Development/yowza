@@ -1,0 +1,190 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+class EventSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        //Seed Database
+        DB::table('events')->insert([
+            [
+                'title' => 'AI and Machine Learning Conference 2024',
+                'description' => 'A comprehensive conference on the latest trends and research in AI and Machine Learning. Industry leaders and researchers will present their findings and insights.',
+                'event_type' => 'physical',
+                'category' => 'Conference',
+                'start_time' => Carbon::create('2024', '09', '15', '09', '00', '00'),
+                'end_time' => Carbon::create('2024', '09', '15', '17', '00', '00'),
+                'event_date' => Carbon::create('2024', '09', '15'),
+                'event_image' => 'ai_ml_conference_2024.jpg',
+            ],
+            [
+                'title' => 'Virtual Yoga Retreat',
+                'description' => 'Join us for a relaxing and rejuvenating virtual yoga retreat. Practice mindfulness and yoga from the comfort of your home.',
+                'event_type' => 'online',
+                'category' => 'Meetup',
+                'start_time' => Carbon::create('2024', '07', '20', '08', '00', '00'),
+                'end_time' => Carbon::create('2024', '07', '20', '12', '00', '00'),
+                'event_date' => Carbon::create('2024', '07', '20'),
+                'event_image' => 'virtual_yoga_retreat.jpg',
+            ],
+            [
+                'title' => 'Blockchain for Business Workshop',
+                'description' => 'Learn how blockchain technology can transform your business. This workshop covers the fundamentals and practical applications of blockchain.',
+                'event_type' => 'physical',
+                'category' => 'Workshop',
+                'start_time' => Carbon::create('2024', '08', '10', '10', '00', '00'),
+                'end_time' => Carbon::create('2024', '08', '10', '16', '00', '00'),
+                'event_date' => Carbon::create('2024', '08', '10'),
+                'event_image' => 'blockchain_business_workshop.jpg',
+            ],
+            [
+                'title' => 'Digital Marketing Mastery Webinar',
+                'description' => 'Enhance your digital marketing skills with this intensive webinar. Topics include SEO, social media marketing, and content strategy.',
+                'event_type' => 'online',
+                'category' => 'Webinar',
+                'start_time' => Carbon::create('2024', '06', '25', '14', '00', '00'),
+                'end_time' => Carbon::create('2024', '06', '25', '17', '00', '00'),
+                'event_date' => Carbon::create('2024', '06', '25'),
+                'event_image' => 'digital_marketing_mastery.jpg',
+            ],
+            [
+                'title' => 'Environmental Sustainability Summit',
+                'description' => 'An event dedicated to discussing and promoting environmental sustainability practices in various industries. Keynote speakers and panel discussions will be featured.',
+                'event_type' => 'physical',
+                'category' => 'Conference',
+                'start_time' => Carbon::create('2024', '10', '05', '09', '00', '00'),
+                'end_time' => Carbon::create('2024', '10', '05', '18', '00', '00'),
+                'event_date' => Carbon::create('2024', '10', '05'),
+                'event_image' => 'sustainability_summit_2024.jpg',
+            ],
+            [
+                'title' => 'Health and Wellness Expo 2024',
+                'description' => 'An expo showcasing the latest in health and wellness products and services. Includes seminars and live demonstrations.',
+                'event_type' => 'physical',
+                'category' => 'Conference',
+                'start_time' => Carbon::create('2024', '11', '12', '10', '00', '00'),
+                'end_time' => Carbon::create('2024', '11', '12', '18', '00', '00'),
+                'event_date' => Carbon::create('2024', '11', '12'),
+                'event_image' => 'health_wellness_expo_2024.jpg',
+            ],
+            [
+                'title' => 'Data Science Bootcamp',
+                'description' => 'An intensive bootcamp that covers the essential skills and knowledge needed to become a data scientist. Includes hands-on projects.',
+                'event_type' => 'online',
+                'category' => 'Workshop',
+                'start_time' => Carbon::create('2024', '08', '05', '09', '00', '00'),
+                'end_time' => Carbon::create('2024', '08', '05', '17', '00', '00'),
+                'event_date' => Carbon::create('2024', '08', '05'),
+                'event_image' => 'data_science_bootcamp.jpg',
+            ],
+            [
+                'title' => 'Cybersecurity Trends and Solutions Webinar',
+                'description' => 'A webinar discussing the latest trends and solutions in cybersecurity. Learn about new threats and how to protect your organization.',
+                'event_type' => 'online',
+                'category' => 'Webinar',
+                'start_time' => Carbon::create('2024', '09', '10', '14', '00', '00'),
+                'end_time' => Carbon::create('2024', '09', '10', '16', '00', '00'),
+                'event_date' => Carbon::create('2024', '09', '10'),
+                'event_image' => 'cybersecurity_trends_webinar.jpg',
+            ],
+            [
+                'title' => 'Startup Pitch Night',
+                'description' => 'An evening where startups pitch their ideas to a panel of investors and industry experts. Networking opportunities available.',
+                'event_type' => 'physical',
+                'category' => 'Meetup',
+                'start_time' => Carbon::create('2024', '07', '30', '18', '00', '00'),
+                'end_time' => Carbon::create('2024', '07', '30', '21', '00', '00'),
+                'event_date' => Carbon::create('2024', '07', '30'),
+                'event_image' => 'startup_pitch_night.jpg',
+            ],
+            [
+                'title' => 'Green Energy Solutions Conference',
+                'description' => 'A conference focused on green energy solutions and technologies. Speakers include industry leaders and experts in sustainable energy.',
+                'event_type' => 'physical',
+                'category' => 'Conference',
+                'start_time' => Carbon::create('2024', '11', '20', '09', '00', '00'),
+                'end_time' => Carbon::create('2024', '11', '20', '17', '00', '00'),
+                'event_date' => Carbon::create('2024', '11', '20'),
+                'event_image' => 'green_energy_conference.jpg',
+            ],
+            [
+                'title' => 'Creative Writing Workshop',
+                'description' => 'A workshop designed to help writers enhance their creative writing skills. Includes writing exercises and peer reviews.',
+                'event_type' => 'physical',
+                'category' => 'Workshop',
+                'start_time' => Carbon::create('2024', '10', '08', '10', '00', '00'),
+                'end_time' => Carbon::create('2024', '10', '08', '16', '00', '00'),
+                'event_date' => Carbon::create('2024', '10', '08'),
+                'event_image' => 'creative_writing_workshop.jpg',
+            ],
+            [
+                'title' => 'Tech Innovators Meetup',
+                'description' => 'A meetup for tech enthusiasts and innovators to share ideas and collaborate on new projects. Includes networking sessions and tech demos.',
+                'event_type' => 'physical',
+                'category' => 'Meetup',
+                'start_time' => Carbon::create('2024', '06', '18', '18', '00', '00'),
+                'end_time' => Carbon::create('2024', '06', '18', '21', '00', '00'),
+                'event_date' => Carbon::create('2024', '06', '18'),
+                'event_image' => 'tech_innovators_meetup.jpg',
+            ],
+            [
+                'title' => 'Virtual Leadership Summit',
+                'description' => 'A summit focused on leadership skills and strategies for professionals. Includes keynote speeches and interactive sessions.',
+                'event_type' => 'online',
+                'category' => 'Conference',
+                'start_time' => Carbon::create('2024', '08', '25', '09', '00', '00'),
+                'end_time' => Carbon::create('2024', '08', '25', '17', '00', '00'),
+                'event_date' => Carbon::create('2024', '08', '25'),
+                'event_image' => 'virtual_leadership_summit.jpg',
+            ],
+            [
+                'title' => 'AI Ethics and Society Webinar',
+                'description' => 'A webinar discussing the ethical implications of AI and its impact on society. Topics include AI bias, privacy, and regulation.',
+                'event_type' => 'online',
+                'category' => 'Webinar',
+                'start_time' => Carbon::create('2024', '09', '12', '10', '00', '00'),
+                'end_time' => Carbon::create('2024', '09', '12', '12', '00', '00'),
+                'event_date' => Carbon::create('2024', '09', '12'),
+                'event_image' => 'ai_ethics_webinar.jpg',
+            ],
+            [
+                'title' => 'Photography Masterclass',
+                'description' => 'A masterclass for photographers looking to enhance their skills. Covers techniques, post-processing, and portfolio building.',
+                'event_type' => 'physical',
+                'category' => 'Workshop',
+                'start_time' => Carbon::create('2024', '07', '22', '09', '00', '00'),
+                'end_time' => Carbon::create('2024', '07', '22', '16', '00', '00'),
+                'event_date' => Carbon::create('2024', '07', '22'),
+                'event_image' => 'photography_masterclass.jpg',
+            ],
+            [
+                'title' => 'Startup Funding Strategies',
+                'description' => 'A meetup discussing strategies for securing funding for startups. Includes talks from successful entrepreneurs and investors.',
+                'event_type' => 'physical',
+                'category' => 'Meetup',
+                'start_time' => Carbon::create('2024', '06', '30', '10', '00', '00'),
+                'end_time' => Carbon::create('2024', '06', '30', '13', '00', '00'),
+                'event_date' => Carbon::create('2024', '06', '30'),
+                'event_image' => 'startup_funding_strategies.jpg',
+            ],
+            [
+                'title' => 'Virtual Art Exhibition',
+                'description' => 'An online exhibition showcasing the work of contemporary artists from around the world. Virtual tours and artist talks included.',
+                'event_type' => 'online',
+                'category' => 'Webinar',
+                'start_time' => Carbon::create('2024', '10', '15', '09', '00', '00'),
+                'end_time' => Carbon::create('2024', '10', '15', '17', '00', '00'),
+                'event_date' => Carbon::create('2024', '10', '15'),
+                'event_image' => 'virtual_art_exhibition.jpg',
+            ],
+        ]);
+    }
+}
