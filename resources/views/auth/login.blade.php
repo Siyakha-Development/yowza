@@ -91,7 +91,7 @@
                 </p>
             </div>
             @endif
-            <div class="my-7 flex items-center space-x-3">
+            {{-- <div class="my-7 flex items-center space-x-3">
                 <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>
                 <p>OR</p>
                 <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>
@@ -107,7 +107,7 @@
                     <img class="size-5.5" src="images/logos/github.svg" alt="logo" />
                     <span>Github</span>
                 </button>
-            </div>
+            </div> --}}
         </div>
     </form>
     <div class="mt-8 flex justify-center text-xs text-slate-400 dark:text-navy-300">
