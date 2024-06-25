@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('community_groups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // group creator
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->boolean('is_private')->default(false);
+            // $table->foreignId('user_id')->constrained()->onDelete('cascade'); // group creator
+            // $table->string('name');
+            // $table->text('description')->nullable();
+            // $table->boolean('is_private')->default(false);
             $table->timestamps();
         });
     }
