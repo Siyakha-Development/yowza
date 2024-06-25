@@ -34,7 +34,8 @@ class SMMEWorkController extends Controller
     }
     public function index(): View
     {
-        $workspaces = SMMEWorkspace::paginate(3);
+        $user = Auth::user();
+        $workspaces = SMMEWorkspace::where('user_id', $user->id)->paginate(3);
         $workspaceId = $workspaces->isEmpty() ? null : $workspaces->first()->id;
 
         $purchased_courses = [];
@@ -46,7 +47,7 @@ class SMMEWorkController extends Controller
                 ->orderBy('id', 'desc')
                 ->get();
         }
-        $user = Auth::user();
+        
         $courses = Course::paginate(10);
         $financialData = FinancialData::where('user_id', $user->id)
             ->with('workspace')

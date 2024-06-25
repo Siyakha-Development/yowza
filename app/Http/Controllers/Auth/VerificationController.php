@@ -31,7 +31,7 @@ class VerificationController extends Controller
         $user_roles = auth()->user()->roles()->pluck('name')->toArray();
 
         if (in_array('SMME', $user_roles)) {
-            return 'smme/admin/dashboard';
+            return 'smme/admin/smmeworkspace';
         } elseif (in_array('Administrator (can create other users)', $user_roles)) {
             return 'admin/admin/dashboard';
         } elseif (in_array('Development Partners', $user_roles)) {
