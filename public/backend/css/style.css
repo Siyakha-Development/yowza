@@ -786,14 +786,14 @@ body, html {
   background-color: #f9fafb;
 }
 
-body {
+/* body {
   color: #666;
   font-size: 15px;
   line-height: 27px;
   background-color: #f9fafb;
   font-family: Inter, "Open Sans", sans-serif !important;
   text-transform: none;
-}
+} */
 
 body.gray {
   background-color: #fbfbfb;

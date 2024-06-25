@@ -17,10 +17,17 @@ class CommunityGroup extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function community_group_members()
+    // public function community_group_members()
+    // {
+    //     // return $this->belongsToMany(User::class, 'community_group_members');
+    //     return $this->belongsToMany(User::class, 'community_group_members')
+    //                 ->withPivot('is_admin')
+    //                 ->withTimestamps();
+    // }
+
+    public function members()
     {
-        // return $this->belongsToMany(User::class, 'community_group_members');
-        return $this->belongsToMany(User::class, 'community_group_members')
+        return $this->belongsToMany(User::class, 'community_group_members', 'community_group_id', 'user_id')
                     ->withPivot('is_admin')
                     ->withTimestamps();
     }

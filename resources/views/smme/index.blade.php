@@ -715,8 +715,14 @@
                                                 <input type="number" step="0.01" class="form-control" id="total_expenses" name="total_expenses" required>
                                             </div>
 
-                                            <input type="hidden" name="s_m_m_e_workspace_id" value="{{ $workspaceId }}">
-                                            <!-- Assuming $workspaceId is passed from the controller -->
+                                            <div class="form-group">
+                                                <label for="s_m_m_e_workspace_id">Select Workspace:</label>
+                                                <select class="form-control" id="s_m_m_e_workspace_id" name="s_m_m_e_workspace_id">
+                                                    @foreach($workspaces as $workspace)
+                                                    <option value="{{ $workspace->id }}" @if($workspace->id == $workspaceId) selected @endif>{{ $workspace->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
                                             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                                             <!-- Assuming the logged-in user's ID is used for user_id -->

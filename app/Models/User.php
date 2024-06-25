@@ -147,11 +147,16 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the groups the user is a member of.
      */
-    public function community_groups()
+    // public function community_groups()
+    // {
+    //     return $this->belongsToMany(CommunityGroup::class, 'community_group_members')
+    //                 ->withPivot('is_admin')
+    //                 ->withTimestamps();
+    // }
+
+    public function communityGroups()
     {
-        // return $this->belongsToMany(CommunityGroup::class, 'group_members');
-        return $this->belongsToMany(CommunityGroup::class, 'community_group_members')
-                    ->withPivot('is_admin')
+        return $this->belongsToMany(CommunityGroup::class, 'community_group_members', 'user_id', 'community_group_id')
                     ->withTimestamps();
     }
 

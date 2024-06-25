@@ -26,7 +26,7 @@ class CommunityGroupController extends Controller
     {
         //
         // $groups = CommunityGroup::with('user')->latest()->get();
-        $groups = CommunityGroup::withCount('community_group_members')->get();
+        $groups = CommunityGroup::withCount('members')->get();
         return view('community.group', compact('groups'));
     }
 
