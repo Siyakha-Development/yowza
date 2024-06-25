@@ -18,7 +18,7 @@ $role = $roles->first();
                 </a>
             </div>
             @endif
-             @if (auth()->user()->hasRole('SMME', 'web'))
+            @if (auth()->user()->hasRole('SMME', 'web'))
             <div class="flex pt-4">
                 <a href="{{ route('smme.smmeworkspace.index', ['prefix' => 'admin']) }}">
                     <img class="size-11 transition-transform duration-500 ease-in-out hover:rotate-[360deg]" src="{{asset('backend/images/yowza-logo-mark-1.png')}}" alt="logo" />
@@ -41,7 +41,7 @@ $role = $roles->first();
                 @endif
 
                 @if (auth()->user()->hasRole('SMME', 'web'))
-                <a href="{{ route('smme.dashboard.index', ['prefix' => 'admin']) }}" class="flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 dark:text-accent-light dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90" x-tooltip.placement.right="'DASHBOARD'">
+                <a href="{{ route('smme.smmeworkspace.index', ['prefix' => 'admin']) }}" class="flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 dark:text-accent-light dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90" x-tooltip.placement.right="'DASHBOARD'">
                     <svg class="size-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <path fill="currentColor" fill-opacity=".3" d="M5 14.059c0-1.01 0-1.514.222-1.945.221-.43.632-.724 1.453-1.31l4.163-2.974c.56-.4.842-.601 1.162-.601.32 0 .601.2 1.162.601l4.163 2.974c.821.586 1.232.88 1.453 1.31.222.43.222.935.222 1.945V19c0 .943 0 1.414-.293 1.707C18.414 21 17.943 21 17 21H7c-.943 0-1.414 0-1.707-.293C5 20.414 5 19.943 5 19v-4.94Z" />
                         <path fill="currentColor" d="M3 12.387c0 .267 0 .4.084.441.084.041.19-.04.4-.204l7.288-5.669c.59-.459.885-.688 1.228-.688.343 0 .638.23 1.228.688l7.288 5.669c.21.163.316.245.4.204.084-.04.084-.174.084-.441v-.409c0-.48 0-.72-.102-.928-.101-.208-.291-.355-.67-.65l-7-5.445c-.59-.459-.885-.688-1.228-.688-.343 0-.638.23-1.228.688l-7 5.445c-.379.295-.569.442-.67.65-.102.208-.102.448-.102.928v.409Z" />
@@ -63,13 +63,21 @@ $role = $roles->first();
                 @endif
                 @if (auth()->user()->hasRole('Administrator (can create other users)', 'web') ||
                 auth()->user()->hasRole('SMME', 'web'))
-                <a href="{{ route('smme.discover.index', ['prefix' => 'smme']) }}" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'DISCOVER'">
+                <a href="{{ route('smme.discover.index', ['prefix' => 'admin']) }}" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'DISCOVER'">
                     <svg class="size-7" xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
                         <path d="m21.5,1H2.5C1.121,1,0,2.122,0,3.5v19.5h16.5c-1.27,0-2.452-.37-3.453-1H1v-13h22v10.465l1,1V3.5c0-1.378-1.121-2.5-2.5-2.5ZM1,8V3.5c0-.827.673-1.5,1.5-1.5h19c.827,0,1.5.673,1.5,1.5v4.5H1Zm4-3c0,.552-.448,1-1,1s-1-.448-1-1,.448-1,1-1,1,.448,1,1Zm3,0c0,.552-.448,1-1,1s-1-.448-1-1,.448-1,1-1,1,.448,1,1Zm3,0c0,.552-.448,1-1,1s-1-.448-1-1,.448-1,1-1,1,.448,1,1Zm10,11.5c0-2.481-2.019-4.5-4.5-4.5s-4.5,2.019-4.5,4.5,2.019,4.5,4.5,4.5c1.06,0,2.023-.384,2.793-1l3.605,3.605.707-.707-3.605-3.605c.616-.77,1-1.733,1-2.793Zm-4.5,3.5c-1.93,0-3.5-1.57-3.5-3.5s1.57-3.5,3.5-3.5,3.5,1.57,3.5,3.5-1.57,3.5-3.5,3.5Z" />
                     </svg>
                 </a>
                 @endif
                 <!-- Pages And Layouts -->
+                <a href="#" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'CONNECT'">
+                    <svg class="size-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.85714 3H4.14286C3.51167 3 3 3.51167 3 4.14286V9.85714C3 10.4883 3.51167 11 4.14286 11H9.85714C10.4883 11 11 10.4883 11 9.85714V4.14286C11 3.51167 10.4883 3 9.85714 3Z" fill="currentColor" />
+                        <path d="M9.85714 12.8999H4.14286C3.51167 12.8999 3 13.4116 3 14.0428V19.757C3 20.3882 3.51167 20.8999 4.14286 20.8999H9.85714C10.4883 20.8999 11 20.3882 11 19.757V14.0428C11 13.4116 10.4883 12.8999 9.85714 12.8999Z" fill="currentColor" fill-opacity="0.3" />
+                        <path d="M19.757 3H14.0428C13.4116 3 12.8999 3.51167 12.8999 4.14286V9.85714C12.8999 10.4883 13.4116 11 14.0428 11H19.757C20.3882 11 20.8999 10.4883 20.8999 9.85714V4.14286C20.8999 3.51167 20.3882 3 19.757 3Z" fill="currentColor" fill-opacity="0.3" />
+                        <path d="M19.757 12.8999H14.0428C13.4116 12.8999 12.8999 13.4116 12.8999 14.0428V19.757C12.8999 20.3882 13.4116 20.8999 14.0428 20.8999H19.757C20.3882 20.8999 20.8999 20.3882 20.8999 19.757V14.0428C20.8999 13.4116 20.3882 12.8999 19.757 12.8999Z" fill="currentColor" fill-opacity="0.3" />
+                    </svg>
+                </a>
                 <a href="#" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'THRIVE'">
                     <svg class="size-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.85714 3H4.14286C3.51167 3 3 3.51167 3 4.14286V9.85714C3 10.4883 3.51167 11 4.14286 11H9.85714C10.4883 11 11 10.4883 11 9.85714V4.14286C11 3.51167 10.4883 3 9.85714 3Z" fill="currentColor" />
@@ -80,7 +88,7 @@ $role = $roles->first();
                 </a>
 
                 <!-- Forms -->
-                <a href="#" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'FAQS'">
+                <a href="#" class="flex size-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25" x-tooltip.placement.right="'HELP DESK'">
                     <svg class="size-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-opacity="0.25" d="M21.0001 16.05V18.75C21.0001 20.1 20.1001 21 18.7501 21H6.6001C6.9691 21 7.3471 20.946 7.6981 20.829C7.7971 20.793 7.89609 20.757 7.99509 20.712C8.31009 20.586 8.61611 20.406 8.88611 20.172C8.96711 20.109 9.05711 20.028 9.13811 19.947L9.17409 19.911L15.2941 13.8H18.7501C20.1001 13.8 21.0001 14.7 21.0001 16.05Z" fill="currentColor" />
                         <path fill-opacity="0.5" d="M17.7324 11.361L15.2934 13.8L9.17334 19.9111C9.80333 19.2631 10.1993 18.372 10.1993 17.4V8.70601L12.6384 6.26701C13.5924 5.31301 14.8704 5.31301 15.8244 6.26701L17.7324 8.17501C18.6864 9.12901 18.6864 10.407 17.7324 11.361Z" fill="currentColor" />
@@ -414,10 +422,38 @@ $role = $roles->first();
                                     </div>
                                 </a>
                             </li>
-                                @endif
+                            @endif
                         </ul>
                     </li>
                     @if (auth()->user()->hasRole('Administrator (can create other users)', 'web'))
+                    <li x-data="accordionItem('menu-item-2')">
+                        <a :class="expanded ? 'text-slate-800 font-semibold dark:text-navy-50' : 'text-slate-600 dark:text-navy-200  hover:text-slate-800  dark:hover:text-navy-50'" @click="expanded = !expanded" class="flex items-center justify-between py-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out" href="javascript:void(0);">
+                            <span>MAIL MANAGEMENT</span>
+                            <svg :class="expanded && 'rotate-90'" xmlns="http://www.w3.org/2000/svg" class="size-4 text-slate-400 transition-transform ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <ul x-collapse x-show="expanded">
+                            <li>
+                                <a x-data="navLink" href="{{ route('admin.users.index', ['prefix' => 'admin']) }}" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="size-1.5 rounded-full border border-current opacity-40">
+                                        </div>
+                                        <span>All Mails</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a x-data="navLink" href="dashboards-banking-2.html" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="size-1.5 rounded-full border border-current opacity-40">
+                                        </div>
+                                        <span>yowza! Subscribers</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li x-data="accordionItem('menu-item-2')">
                         <a :class="expanded ? 'text-slate-800 font-semibold dark:text-navy-50' : 'text-slate-600 dark:text-navy-200  hover:text-slate-800  dark:hover:text-navy-50'" @click="expanded = !expanded" class="flex items-center justify-between py-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out" href="javascript:void(0);">
                             <span>USER MANAGEMENT</span>
@@ -580,29 +616,29 @@ $role = $roles->first();
                                     </div>
                                 </a>
                             </li>
-@if (auth()->user()->hasRole('Administrator (can create other users)', 'web'))
-<li>
-   <a x-data="navLink" href="{{ route('admin.events.create',['prefix' => 'admin']) }}" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
-       <div class="flex items-center space-x-2">
-           <div class="size-1.5 rounded-full border border-current opacity-40">
-           </div>
-           <span>Create Event</span>
-       </div>
-   </a>
-</li>
-    <li>
-   <a x-data="navLink" href="{{ route('admin.events.all', ['prefix' => 'admin']) }}" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
-       <div class="flex items-center space-x-2">
-           <div class="size-1.5 rounded-full border border-current opacity-40">
-           </div>
-           <span>View All</span>
-       </div>
-   </a>
-</li>
+                            @if (auth()->user()->hasRole('Administrator (can create other users)', 'web'))
+                            <li>
+                                <a x-data="navLink" href="{{ route('admin.events.create',['prefix' => 'admin']) }}" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="size-1.5 rounded-full border border-current opacity-40">
+                                        </div>
+                                        <span>Create Event</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a x-data="navLink" href="{{ route('admin.events.all', ['prefix' => 'admin']) }}" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="size-1.5 rounded-full border border-current opacity-40">
+                                        </div>
+                                        <span>View All</span>
+                                    </div>
+                                </a>
+                            </li>
 
-@endif
-</ul>
-</li>
+                            @endif
+                        </ul>
+                    </li>
                     <li x-data="accordionItem('menu-item-6')">
                         <a :class="expanded ? 'text-slate-800 font-semibold dark:text-navy-50' : 'text-slate-600 dark:text-navy-200  hover:text-slate-800  dark:hover:text-navy-50'" @click="expanded = !expanded" class="flex items-center justify-between py-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out" href="javascript:void(0);">
                             <span>MARKETPLACE</span>
@@ -620,32 +656,32 @@ $role = $roles->first();
                                     </div>
                                 </a>
                             </li>
-@if (auth()->user()->hasRole('Administrator (can create other users)', 'web'))
-<li>
-   <a x-data="navLink" href="{{ route('marketplace.listings.create') }}" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
-       <div class="flex items-center space-x-2">
-           <div class="size-1.5 rounded-full border border-current opacity-40">
-           </div>
-           <span>Create new Listing</span>
-       </div>
-   </a>
-</li>
-    <li>
-   <a x-data="navLink" href="{{ route('admin.events.all',['prefix' => 'admin']) }}" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
-       <div class="flex items-center space-x-2">
-           <div class="size-1.5 rounded-full border border-current opacity-40">
-           </div>
-           <span>View All</span>
-       </div>
-   </a>
-</li>
+                            @if (auth()->user()->hasRole('Administrator (can create other users)', 'web'))
+                            <li>
+                                <a x-data="navLink" href="{{ route('marketplace.listings.create') }}" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="size-1.5 rounded-full border border-current opacity-40">
+                                        </div>
+                                        <span>Create new Listing</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a x-data="navLink" href="{{ route('admin.events.all',['prefix' => 'admin']) }}" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="size-1.5 rounded-full border border-current opacity-40">
+                                        </div>
+                                        <span>View All</span>
+                                    </div>
+                                </a>
+                            </li>
 
-@endif
-</ul>
-</li>
-</ul>
-<div class="my-3 mx-4 h-px bg-slate-200 dark:bg-navy-500"></div>
-</div>
-</div>
-</div>
+                            @endif
+                        </ul>
+                    </li>
+                </ul>
+                <div class="my-3 mx-4 h-px bg-slate-200 dark:bg-navy-500"></div>
+            </div>
+        </div>
+    </div>
 </div>

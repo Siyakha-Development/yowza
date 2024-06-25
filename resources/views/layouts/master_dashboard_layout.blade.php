@@ -129,6 +129,13 @@
 
     </script>
 
+    <style>
+        .tox .tox-statusbar__branding a {
+    align-items: center;
+    display: none !important;
+}
+    </style>
+
     
 
     <script src="https://cdn.tiny.cloud/1/7848drnfikg76o7xgogp561fchodvpdj4rz5aze1ze188tuw/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>

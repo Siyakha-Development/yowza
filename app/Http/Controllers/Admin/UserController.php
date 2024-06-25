@@ -54,7 +54,7 @@ class UserController extends Controller
 
         $prefix = 'admin';
         return view('admin.users.index', [
-            'users' => User::latest('id')->paginate(10),
+            'users' => User::latest('id')->paginate(100),
             'prefix' => $prefix
         ]);
     }

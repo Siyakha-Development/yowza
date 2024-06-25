@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\SMMEWorkspace;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Point;
+use App\Models\Subscriber;
+
 
 class DashboardController extends Controller
 {
@@ -40,8 +43,16 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $blog = Post::with('categories')->get();
-        $perPage = $request->input('entries', 10);
+        $perPage = $request->input('entries', 5);
         $activities = UserActivity::paginate($perPage);
+        $workspaces = SMMEWorkspace::paginate($perPage);
+        $subscriberCount = Subscriber::count();
+
+        foreach ($workspaces as $workspace) {
+            $workspace->points = Point::where('user_id', $workspace->user_id)
+                                      ->where('action', 'created_smme_workspace')
+                                      ->sum('points');
+        }
 
         $deviceCounts = [];
         $platformCounts = [];
@@ -79,7 +90,7 @@ class DashboardController extends Controller
         }
         $users = User::with('points')->get();
         $totalPoints = Point::sum('points');
-        return view('admin.index',compact('blog', 'activities', 'perPage', 'users', 'totalPoints', 'deviceCounts', 'platformCounts', 'browserCounts', 'robotCounts'));
+        return view('admin.index',compact('subscriberCount', 'blog', 'activities', 'perPage', 'users', 'totalPoints', 'deviceCounts', 'platformCounts', 'browserCounts', 'robotCounts', 'workspaces'));
     }
 
 

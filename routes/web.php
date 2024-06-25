@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Community\CommunityCommentController;
 use App\Http\Controllers\Community\CommunityGroupController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\Contact\ContactFormController;
 use App\Http\Controllers\UserProfileImageController;
 use App\Http\Controllers\Admin\ProgressController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\SubscriptionController;
 
 
 
@@ -64,8 +66,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/contact-form', [ContactFormController::class, 'showContactForm'])->name('contact-form');
     Route::post('/contact-form', [ContactFormController::class, 'submit'])->name('contact-form.submit');
 
+    Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+
     Route::group(['middleware' => ['isAdmin'], 'prefix' => 'admin/{prefix}', 'as' => 'admin.'], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('mail-system', SubscriberController::class);
+        Route::get('subscribers', [SubscriberController::class, 'subscribers'])->name('all-subs');
 
         //Blog post Layouts
 
@@ -177,6 +183,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/accept-invitation/{workspace}', [SMMEWorkController::class, 'acceptInvitation'])->name('accept.invitation');
         Route::post('smmeworkspace/{workspace}/approve/{user}', [SMMEWorkController::class, 'approveUser'])->name('workspace.approve');
         Route::post('smmeworkspace/{workspace}/reject/{user}', [SMMEWorkController::class, 'rejectUser'])->name('workspace.reject');
+
+        Route::post('financial-data', [SMMEWorkController::class, 'store_data'])->name('financial-data.store');
+
 
         Route::resource('/organization-workspace', OrganisationWorkspaceController::class);
         Route::post('/organization-workspace/{workspace}/join', [OrganisationWorkspaceController::class, 'join'])->name('workspace.join');

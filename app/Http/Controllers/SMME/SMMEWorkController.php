@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SMME;
 use App\Http\Controllers\Controller;
 use App\Mail\UserRequestedToJoinWorkspace;
 use App\Models\Course;
+use App\Models\SMME\FinancialData;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\SMMEWorkspace;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Rules\AcceptedTerms;
 use App\Mail\WorkspaceInvitation;
 use App\Services\PointService;
+
 
 
 
@@ -33,6 +35,7 @@ class SMMEWorkController extends Controller
     public function index(): View
     {
         $workspaces = SMMEWorkspace::paginate(3);
+        $workspaceId = $workspaces->isEmpty() ? null : $workspaces->first()->id;
 
         $purchased_courses = [];
         if (auth()->check()) {
@@ -43,9 +46,14 @@ class SMMEWorkController extends Controller
                 ->orderBy('id', 'desc')
                 ->get();
         }
+        $user = Auth::user();
         $courses = Course::paginate(10);
+        $financialData = FinancialData::where('user_id', $user->id)
+            ->with('workspace')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
-        return view('smme.index', compact('workspaces', 'courses'));
+        return view('smme.index', compact('workspaces', 'courses', 'financialData', 'workspaceId'));
     }
 
     public function all_workspace()
@@ -160,6 +168,48 @@ class SMMEWorkController extends Controller
     //     // Return a response
     //     return response()->json(['message' => 'SMMEWorkspace created successfully', 'data' => $smmeWorkspace], 201);
     // }
+
+    public function store_data(Request $request)
+    {
+        $validatedData = $request->validate([
+            's_m_m_e_workspace_id' => 'required|exists:s_m_m_e_workspaces,id',
+            'user_id' => 'required|exists:users,id',
+            'total_income' => 'required|numeric',
+            'total_expenses' => 'required|numeric',
+        ]);
+
+        // Calculate net income
+        $netIncome = $validatedData['total_income'] - $validatedData['total_expenses'];
+
+        // Fetch previous month's net income (if exists)
+        $previousFinancialData = FinancialData::where('s_m_m_e_workspace_id', $validatedData['s_m_m_e_workspace_id'])
+            ->where('user_id', $validatedData['user_id'])
+            ->latest('created_at')
+            ->first();
+
+        $prevMonNetIncome = $previousFinancialData ? $previousFinancialData->net_income : null;
+
+        // Calculate growth in profit
+        $growthInProfit = null;
+        if ($prevMonNetIncome !== null && $prevMonNetIncome != 0) {
+            $growthInProfit = (($netIncome - $prevMonNetIncome) / $prevMonNetIncome) * 100;
+        }
+
+        // Store the financial data
+        $financialData = new FinancialData();
+        $financialData->fill(array_merge($validatedData, [
+            'net_income' => $netIncome,
+            'prev_mon_net_income' => $prevMonNetIncome,
+        ]));
+        $financialData->save();
+
+        // Update the growth in profit in SMMEWorkspace
+        $workspace = SMMEWorkspace::findOrFail($validatedData['s_m_m_e_workspace_id']);
+        $workspace->smme_growth_in_profit = $growthInProfit;
+        $workspace->save();
+
+        return response()->json(['message' => 'Financial data saved successfully']);
+    }
 
     public function store(Request $request)
     {

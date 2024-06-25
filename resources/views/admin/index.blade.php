@@ -227,7 +227,7 @@
                     <h2
                         class="font-medium tracking-wide text-slate-700 dark:text-navy-100"
                     >
-                        Budget
+                        Subscribers
                     </h2>
                     <div
                         x-data="usePopper({placement:'bottom-end',offset:4})"
@@ -308,17 +308,17 @@
                             <p
                                 class="text-2xl font-semibold text-slate-700 dark:text-navy-100"
                             >
-                                $67.4k
+                                {{ $subscriberCount }}
                             </p>
                             <a
                                 href="#"
                                 class="border-b border-dotted border-current pb-0.5 text-tiny font-medium uppercase text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70"
                             >
-                                Yearly Budget
+                                Subscribers
                             </a>
                         </div>
                         <p class="mt-2 text-xs leading-normal line-clamp-3">
-                            You have spent about 25% of your annual budget.
+                            20 Emails have been sent
                         </p>
                     </div>
 
@@ -595,6 +595,11 @@
             <div
                 class="scrollbar-sm flex space-x-3 overflow-x-auto px-4 pb-3 sm:px-5"
             >
+            @if ($workspaces->isEmpty())
+                No Workspace avaialable
+            @else
+
+            @foreach ($workspaces as $workspace)
                 <div
                     class="w-56 shrink-0 rounded-xl bg-slate-50 p-4 dark:bg-navy-600"
                 >
@@ -602,33 +607,35 @@
                         <div
                             class="size-16 rounded-full bg-gradient-to-r from-sky-400 to-blue-600 p-0.5"
                         >
+                        @if ($workspace->smme_logo)
                             <img
                                 class="h-full w-full rounded-full border-2 border-white object-cover object-center dark:border-navy-700"
-                                src="images/avatar/avatar-20.jpg"
+                                src="{{ asset('storage/' . $workspace->smme_logo) }}"
                                 alt="image"
                             />
+                        @endif
                         </div>
                         <div>
                             <p
                                 class="text-base font-medium text-slate-700 dark:text-navy-100"
                             >
-                                Travis Fuller
+                                {{ $workspace->name }}
                             </p>
                             <p class="text-xs+ text-slate-400 dark:text-navy-300">
-                                Salesman
+                                {{ $workspace->smme_business_name }}
                             </p>
                         </div>
                     </div>
                     <div class="mt-5">
                         <div>
-                            <p>Sales</p>
+                            <p>Ranking Points</p>
                             <div class="mt-0.5 flex space-x-2">
                                 <p
                                     class="text-xl font-semibold text-slate-700 dark:text-navy-100"
                                 >
-                                    2 348
+                                    <strong>Points:</strong> {{ $workspace->points }}
                                 </p>
-                                <p
+                                {{-- <p
                                     class="flex items-center space-x-0.5 text-xs text-success"
                                 >
                                     <svg
@@ -646,14 +653,10 @@
                                         />
                                     </svg>
                                     <span>4.3%</span>
-                                </p>
+                                </p> --}}
                             </div>
                         </div>
-                        <div class="ax-transparent-gridline">
-                            <div
-                                x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.topSeller1); $el._x_chart.render() });"
-                            ></div>
-                        </div>
+                        
                     </div>
                     <div class="mt-5 flex justify-center space-x-2">
                         <button
@@ -712,357 +715,8 @@
                         </button>
                     </div>
                 </div>
-                <div
-                    class="w-56 shrink-0 rounded-xl bg-slate-50 p-4 dark:bg-navy-600"
-                >
-                    <div class="flex flex-col items-center space-y-3 text-center">
-                        <div
-                            class="size-16 rounded-full bg-gradient-to-r from-sky-400 to-blue-600 p-0.5"
-                        >
-                            <img
-                                class="h-full w-full rounded-full border-2 border-white object-cover object-center dark:border-navy-700"
-                                src="images/avatar/avatar-5.jpg"
-                                alt="image"
-                            />
-                        </div>
-                        <div>
-                            <p
-                                class="text-base font-medium text-slate-700 dark:text-navy-100"
-                            >
-                                Konnor Guzman
-                            </p>
-                            <p class="text-xs+ text-slate-400 dark:text-navy-300">
-                                Salesman
-                            </p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <div>
-                            <p>Sales</p>
-                            <div class="mt-0.5 flex space-x-2">
-                                <p
-                                    class="text-xl font-semibold text-slate-700 dark:text-navy-100"
-                                >
-                                    6 052
-                                </p>
-                                <p
-                                    class="flex items-center space-x-0.5 text-xs text-error"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="size-4"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M17 13l-5 5m0 0l-5-5m5 5V6"
-                                        />
-                                    </svg>
-                                    <span>2.33%</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="ax-transparent-gridline">
-                            <div
-                                x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.topSeller2); $el._x_chart.render() });"
-                            ></div>
-                        </div>
-                    </div>
-                    <div class="mt-5 flex justify-center space-x-2">
-                        <button
-                            class="btn size-8 rounded-full bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="size-4.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                />
-                            </svg>
-                        </button>
-                        <button
-                            class="btn size-8 rounded-full bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="size-4.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                />
-                            </svg>
-                        </button>
-                        <button
-                            class="btn size-8 rounded-full bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="size-4.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div
-                    class="w-56 shrink-0 rounded-xl bg-slate-50 p-4 dark:bg-navy-600"
-                >
-                    <div class="flex flex-col items-center space-y-3 text-center">
-                        <div
-                            class="size-16 rounded-full bg-gradient-to-r from-sky-400 to-blue-600 p-0.5"
-                        >
-                            <img
-                                class="h-full w-full rounded-full border-2 border-white object-cover object-center dark:border-navy-700"
-                                src="images/avatar/avatar-11.jpg"
-                                alt="image"
-                            />
-                        </div>
-                        <div>
-                            <p
-                                class="text-base font-medium text-slate-700 dark:text-navy-100"
-                            >
-                                Katrina West
-                            </p>
-                            <p class="text-xs+ text-slate-400 dark:text-navy-300">
-                                Saleswoman
-                            </p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <div>
-                            <p>Sales</p>
-                            <div class="mt-0.5 flex space-x-2">
-                                <p
-                                    class="text-xl font-semibold text-slate-700 dark:text-navy-100"
-                                >
-                                    2 348
-                                </p>
-                                <p
-                                    class="flex items-center space-x-0.5 text-xs text-success"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="size-3"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M5 10l7-7m0 0l7 7m-7-7v18"
-                                        />
-                                    </svg>
-                                    <span>3.33%</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="ax-transparent-gridline">
-                            <div
-                                x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.topSeller3); $el._x_chart.render() });"
-                            ></div>
-                        </div>
-                    </div>
-                    <div class="mt-5 flex justify-center space-x-2">
-                        <button
-                            class="btn size-8 rounded-full bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="size-4.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                />
-                            </svg>
-                        </button>
-                        <button
-                            class="btn size-8 rounded-full bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="size-4.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                />
-                            </svg>
-                        </button>
-                        <button
-                            class="btn size-8 rounded-full bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="size-4.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div
-                    class="w-56 shrink-0 rounded-xl bg-slate-50 p-4 dark:bg-navy-600"
-                >
-                    <div class="flex flex-col items-center space-y-3 text-center">
-                        <div
-                            class="size-16 rounded-full bg-gradient-to-r from-sky-400 to-blue-600 p-0.5"
-                        >
-                            <img
-                                class="h-full w-full rounded-full border-2 border-white object-cover object-center dark:border-navy-700"
-                                src="images/avatar/avatar-17.jpg"
-                                alt="image"
-                            />
-                        </div>
-                        <div>
-                            <p
-                                class="text-base font-medium text-slate-700 dark:text-navy-100"
-                            >
-                                Henry Curtis
-                            </p>
-                            <p class="text-xs+ text-slate-400 dark:text-navy-300">
-                                Salesman
-                            </p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <div>
-                            <p>Sales</p>
-                            <div class="mt-0.5 flex space-x-2">
-                                <p
-                                    class="text-xl font-semibold text-slate-700 dark:text-navy-100"
-                                >
-                                    4 574
-                                </p>
-                                <p
-                                    class="flex items-center space-x-0.5 text-xs text-success"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="size-3"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M5 10l7-7m0 0l7 7m-7-7v18"
-                                        />
-                                    </svg>
-                                    <span>1.2%</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="ax-transparent-gridline">
-                            <div
-                                x-init="$nextTick(() => { $el._x_chart = new ApexCharts($el,pages.charts.topSeller4); $el._x_chart.render() });"
-                            ></div>
-                        </div>
-                    </div>
-                    <div class="mt-5 flex justify-center space-x-2">
-                        <button
-                            class="btn size-8 rounded-full bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="size-4.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                />
-                            </svg>
-                        </button>
-                        <button
-                            class="btn size-8 rounded-full bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="size-4.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                />
-                            </svg>
-                        </button>
-                        <button
-                            class="btn size-8 rounded-full bg-primary/10 p-0 text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-accent-light/10 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="size-4.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
+            @endforeach
+            @endif  
             </div>
         </div>
         <div

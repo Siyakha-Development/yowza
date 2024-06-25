@@ -5,7 +5,7 @@
         <h3 class="text-xl font-semibold text-slate-700 dark:text-navy-100">
             SMME Workspace Board
         </h3>
-        <p class="mt-1 hidden sm:block">List of your ongoing projects</p>
+        <p class="mt-1 hidden sm:block"></p>
     </div>
     <a href="{{ route('smme.organization-workspace.create', ['prefix' => 'admin']) }}" class="btn space-x-2 bg-primary font-medium text-white shadow-lg shadow-primary/50 hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:shadow-accent/50 dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
         <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-indigo-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
