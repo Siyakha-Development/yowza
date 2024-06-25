@@ -35,7 +35,8 @@ class SMMEWorkController extends Controller
     public function index(): View
     {
         $user = Auth::user();
-        $workspaces = SMMEWorkspace::where('user_id', $user->id)->paginate(3);
+        // $workspaces = SMMEWorkspace::where('user_id', $user->id)->paginate(3);
+        $workspaces = $user->smmeWorkspaces()->paginate(3);
         $workspaceId = $workspaces->isEmpty() ? null : $workspaces->first()->id;
 
         $purchased_courses = [];
