@@ -656,7 +656,8 @@ $role = $roles->first();
                                     </div>
                                 </a>
                             </li>
-                            @if (auth()->user()->hasRole('Administrator (can create other users)', 'web'))
+                            @if (auth()->user()->hasRole('Administrator (can create other users)', 'web') ||
+                    auth()->user()->hasRole('SMME', 'web'))
                             <li>
                                 <a x-data="navLink" href="{{ route('marketplace.listings.create') }}" :class="isActive ? 'font-medium text-primary dark:text-accent-light' : 'text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50'" class="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4">
                                     <div class="flex items-center space-x-2">
