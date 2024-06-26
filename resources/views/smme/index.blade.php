@@ -706,18 +706,22 @@
                                             @csrf
 
                                             <div class="form-group">
-                                                <label for="total_income">Total Income:</label>
-                                                <input type="number" step="0.01" class="form-control" id="total_income" name="total_income" required>
+
+                                                <label for="total_income" class="block">
+                                                    <span>Total Income:</span>
+                                                    <input type="number" step="0.01" class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" id="total_income" name="total_income" required>
+                                                    </lable>
+
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="total_expenses">Total Expenses:</label>
-                                                <input type="number" step="0.01" class="form-control" id="total_expenses" name="total_expenses" required>
+                                                <input type="number" step="0.01" class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" id="total_expenses" name="total_expenses" required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="s_m_m_e_workspace_id">Select Workspace:</label>
-                                                <select class="form-control" id="s_m_m_e_workspace_id" name="s_m_m_e_workspace_id">
+                                                <select class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" id="s_m_m_e_workspace_id" name="s_m_m_e_workspace_id">
                                                     @foreach($workspaces as $workspace)
                                                     <option value="{{ $workspace->id }}" @if($workspace->id == $workspaceId) selected @endif>{{ $workspace->name }}</option>
                                                     @endforeach
@@ -726,8 +730,9 @@
 
                                             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                                             <!-- Assuming the logged-in user's ID is used for user_id -->
+                                            <br>
 
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">Submit</button>
                                         </form>
                                         @endif
 

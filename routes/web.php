@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Community\CommunityCommentController;
 use App\Http\Controllers\Community\CommunityGroupController;
+use App\Http\Controllers\Community\CommunityGroupPostController;
 use App\Http\Controllers\Community\CommunityLikeController;
+use App\Http\Controllers\SMME\BusinessToolsController;
 use App\Http\Controllers\SMME\SMMEWorkController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
@@ -35,6 +37,7 @@ use App\Http\Controllers\UserProfileImageController;
 use App\Http\Controllers\Admin\ProgressController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\SubscriptionController;
+
 
 
 
@@ -200,9 +203,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->name('community-comments.store');
         Route::resource('yowza-community-groups', \App\Http\Controllers\Community\CommunityGroupController::class);
         Route::post('yowza-community-groups/{groupId}/join', [CommunityGroupController::class, 'join'])->name('groups.join');
+        //Route::get('/community-groups/{group}/posts/create', [CommunityGroupPostController::class, 'create'])->name('community-posts.create');
+        //Route::post('/community-groups/{group}/posts', [CommunityGroupPostController::class, 'store'])->name('community-posts.store');
 
-
-
+        Route::resource('smme-business-tools', BusinessToolsController::class);
 
 
 
