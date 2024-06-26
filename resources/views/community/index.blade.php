@@ -3,7 +3,7 @@
 <div class="flex items-center justify-between py-5 lg:py-6">
     <div class="flex items-center space-x-1">
         <h2 class="text-xl font-medium text-slate-700 line-clamp-1 dark:text-navy-50 lg:text-2xl">
-           Yowza Community
+            Yowza Community
         </h2>
         <div x-data="usePopper({placement:'bottom-start',offset:4})" @click.outside="isShowPopper &amp;&amp; (isShowPopper = false)" class="inline-flex">
             <button x-ref="popperRef" @click="isShowPopper = !isShowPopper" class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
@@ -14,18 +14,18 @@
                 <div class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
                     <ul>
                         <li>
-                            <a href="{{ route('smme.yowza-community-groups.create', ['prefix' => 'admin'])}}" class="flex h-8 items-center space-x-3 px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
+                            <a href="{{ route('smme.yowza-community-groups.index', ['prefix' => 'admin'])}}" class="flex h-8 items-center space-x-3 px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="mt-px size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
                                 </svg>
-                                <span> Create a Group</span></a>
+                                <span> Join a Group</span></a>
                         </li>
                         <li>
-                            <a href="#" class="flex h-8 items-center space-x-3 px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
+                            <a href="{{ route('smme.yowza-community-groups.create', ['prefix' => 'admin'])}}" class="flex h-8 items-center space-x-3 px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="mt-px size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                 </svg>
-                                <span>Join a Group</span></a>
+                                <span>Create a Group</span></a>
                         </li>
                         <li>
                             <a href="#" class="flex h-8 items-center space-x-3 px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">
@@ -41,1040 +41,1018 @@
         </div>
     </div>
 
-    
+
 </div>
+
+<div class="mb-8">
+
+    <h3 class="font-extrabold text-2xl  text-black dark:text-white hidden"> Stories</h3>
+
+    <div class="relative uk-slider" tabindex="-1" uk-slider="auto play: true;finite: true" uk-lightbox="">
+
+        <div class="py-5 uk-slider-container">
+
+            <ul class="uk-slider-items w-[calc(100%+14px)]" uk-scrollspy="target: > li; cls: uk-animation-scale-up; delay: 20;repeat:true" style="transform: translate3d(0px, 0px, 0px);">
+                <li class="md:pr-3 uk-active uk-scrollspy-inview " uk-scrollspy-class="uk-animation-fade" tabindex="-1" style="">
+                    <div class="md:w-16 md:h-16 w-12 h-12 rounded-full relative border-2 border-dashed grid place-items-center bg-slate-200 border-slate-300 dark:border-slate-700 dark:bg-dark2 shrink-0" uk-toggle="target: #create-story" tabindex="0" aria-expanded="false">
+                        <ion-icon name="camera" class="text-2xl md hydrated" role="img" aria-label="camera"></ion-icon>
+                    </div>
+                </li>
+
+                @forelse($stories as $story)
+                <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300 uk-active uk-scrollspy-inview" tabindex="-1">
+                    <a href="{{ asset('images/community_stories/' . $story->image) }}" data-caption="{{ $story->caption }}">
+                        <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
+                            <img src="{{ asset('images/community_stories/' . $story->image) }}" alt="Story Image" class="absolute w-full h-full object-cover">
+                        </div>
+                    </a>
+                </li>
+                @empty
+                <li class="md:pr-3 pr-2" tabindex="-1" style="opacity: 0;">
+                    <div class="md:w-16 md:h-16 w-12 h-12 bg-slate-200/60 rounded-full dark:bg-dark2 animate-pulse"></div>
+                </li>
+                @endforelse
+
+
+                {{-- <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300 uk-active uk-scrollspy-inview " tabindex="-1" style="">
+                            <a href="assets/images/avatars/avatar-lg-1.jpg" data-caption="Caption 1">
+                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
+                                    <img src="assets/images/avatars/avatar-2.jpg" alt="" class="absolute w-full h-full object-cover">
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <li class="md:pr-3 pr-2" tabindex="-1" style="opacity: 0;">
+                            <div class="md:w-16 md:h-16 w-12 h-12 bg-slate-200/60 rounded-full dark:bg-dark2 animate-pulse"></div>
+                        </li> --}}
+            </ul>
+
+        </div>
+
+        <div class="max-md:hidden">
+
+            <button type="button" class="absolute -translate-y-1/2 bg-white shadow rounded-full top-1/2 -left-3.5 grid w-8 h-8 place-items-center dark:bg-dark3 uk-invisible" uk-slider-item="previous">
+                <ion-icon name="chevron-back" class="text-2xl md hydrated" role="img" aria-label="chevron back"></ion-icon>
+            </button>
+            <button type="button" class="absolute -right-2 -translate-y-1/2 bg-white shadow rounded-full top-1/2 grid w-8 h-8 place-items-center dark:bg-dark3" uk-slider-item="next">
+                <ion-icon name="chevron-forward" class="text-2xl md hydrated" role="img" aria-label="chevron forward"></ion-icon>
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+<div class="grid grid-cols-12 lg:gap-6">
+    <div class="col-span-12 pt-6 lg:col-span-8 lg:pb-6">
+        <div class="card p-4 lg:p-6 bg-white rounded-xl shadow-sm md:p-4 p-2 space-y-4 text-sm font-medium border1 dark:bg-dark2">
+
+            <div class="flex items-center md:gap-3 gap-1">
+                <div class="flex-1 bg-slate-100 hover:bg-opacity-80 transition-all rounded-lg cursor-pointer dark:bg-dark3" uk-toggle="target: #create-status" tabindex="0" aria-expanded="false">
+                    <div class="py-2.5 text-center dark:text-white"> What do you have in mind? </div>
+                </div>
+                <div class="cursor-pointer hover:bg-opacity-80 p-1 px-1.5 rounded-xl transition-all bg-pink-100/60 hover:bg-pink-100 dark:bg-white/10 dark:hover:bg-white/20" uk-toggle="target: #create-status" tabindex="0" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 stroke-pink-600 fill-pink-200/70" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M15 8h.01"></path>
+                        <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"></path>
+                        <path d="M3.5 15.5l4.5 -4.5c.928 -.893 2.072 -.893 3 0l5 5"></path>
+                        <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l2.5 2.5"></path>
+                    </svg>
+                </div>
+                <div class="cursor-pointer hover:bg-opacity-80 p-1 px-1.5 rounded-xl transition-all bg-sky-100/60 hover:bg-sky-100 dark:bg-white/10 dark:hover:bg-white/20" uk-toggle="target: #create-status" tabindex="0" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 stroke-sky-600 fill-sky-200/70 " viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z"></path>
+                        <path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
+                    </svg>
+                </div>
+            </div>
+
+        </div>
+        <br>
+
+
+        <!--  post image-->
+        @if($posts->isEmpty())
+        <p>No posts available.</p>
+        <div class="rounded-xl shadow-sm p-4 space-y-4 bg-slate-200/40 animate-pulse border1 dark:bg-dark2">
+
+            <div class="flex gap-3">
+                <div class="w-9 h-9 rounded-full bg-slate-300/20"></div>
+                <div class="flex-1 space-y-3">
+                    <div class="w-40 h-5 rounded-md bg-slate-300/20"></div>
+                    <div class="w-24 h-4 rounded-md bg-slate-300/20"></div>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-slate-300/20"></div>
+            </div>
+
+            <div class="w-full h-52 rounded-lg bg-slate-300/10 my-3"> </div>
+
+            <div class="flex gap-3">
+
+                <div class="w-16 h-5 rounded-md bg-slate-300/20"></div>
+
+                <div class="w-14 h-5 rounded-md bg-slate-300/20"></div>
+
+                <div class="w-6 h-6 rounded-full bg-slate-300/20 ml-auto"></div>
+                <div class="w-6 h-6 rounded-full bg-slate-300/20  "></div>
+            </div>
+
+        </div>
+        @else
+        @foreach($posts as $post)
+        <div class="bg-white rounded-xl shadow-sm text-sm font-medium border1 dark:bg-dark2">
+
+            <!-- post heading -->
+            <div class="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
+                <a href="timeline.html"> <img src="{{ $profileImage ? asset('profile_pictures/' . $profileImage) : asset('backend/images/avatar/black-afro.png') }}" alt="" class="w-9 h-9 rounded-full"> </a>
+                <div class="flex-1">
+                    <a href="timeline.html">
+                        <h4 class="text-black dark:text-white"> {{ $post->user->name }} </h4>
+                    </a>
+                    <div class="text-xs text-gray-500 dark:text-white/80"> {{ $post->created_at->format('M d, Y') }}</div>
+                </div>
+
+
+
+                <div class="-mr-1">
+                    <button type="button" class="button-icon w-8 h-8" aria-haspopup="true" aria-expanded="false">
+                        <ion-icon class="text-xl md hydrated" name="ellipsis-horizontal" role="img" aria-label="ellipsis horizontal"></ion-icon>
+                    </button>
+                    <div class="w-[245px] uk-dropdown" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
+                        <nav>
+                            <a href="#">
+                                <ion-icon class="text-xl shrink-0 md hydrated" name="bookmark-outline" role="img" aria-label="bookmark outline"></ion-icon> Add to favorites
+                            </a>
+                            <a href="#">
+                                <ion-icon class="text-xl shrink-0 md hydrated" name="notifications-off-outline" role="img" aria-label="notifications off outline"></ion-icon> Mute Notification
+                            </a>
+                            <a href="#">
+                                <ion-icon class="text-xl shrink-0 md hydrated" name="flag-outline" role="img" aria-label="flag outline"></ion-icon> Report this post
+                            </a>
+                            <a href="#">
+                                <ion-icon class="text-xl shrink-0 md hydrated" name="share-outline" role="img" aria-label="share outline"></ion-icon> Share your profile
+                            </a>
+                            <hr>
+                            <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50">
+                                <ion-icon class="text-xl shrink-0 md hydrated" name="stop-circle-outline" role="img" aria-label="stop circle outline"></ion-icon> Unfollow
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sm:px-4 p-2.5 pt-0">
+                <p class="font-normal"> {{ $post->content }}</p>
+            </div>
+
+            <!-- post image -->
+            <a href="#preview_modal" uk-toggle="" aria-expanded="false">
+                @if($post->post_image)
+                <div class="relative w-full lg:h-96 h-full sm:px-4">
+                    <img src="{{ Storage::url($post->post_image) }}" alt="" class="sm:rounded-lg w-full h-full object-cover">
+                </div>
+                @endif
+            </a>
+
+            <!-- post icons -->
+            <div class="sm:p-4 p-2.5 flex items-center gap-4 text-xs font-semibold">
+                <div>
+                    <div class="flex items-center gap-2.5" tabindex="0" aria-haspopup="true" aria-expanded="false">
+                        <form id="like-form-{{ $post->id }}" action="{{ route('smme.community-likes.store', ['prefix' => 'admin']) }}" method="POST" class="d-inline">
+                            @csrf
+                            <input type="hidden" name="likeable_id" value="{{ $post->id }}">
+                            <input type="hidden" name="likeable_type" value="{{ get_class($post) }}">
+                            <button onclick="document.getElementById('like-form-{{ $post->id }}').submit();" type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700">
+                                <ion-icon class="text-lg md hydrated" name="heart" role="img" aria-label="heart"></ion-icon>
+                            </button>
+                        </form>
+                        <a href="#">{{ $post->likes->count() }}</a>
+                    </div>
+                    <div class="p-1 px-2 bg-white rounded-full drop-shadow-md w-[212px] dark:bg-slate-700 text-2xl uk-drop" uk-drop="offset:10;pos: top-left; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-bottom-left">
+
+                        <div class="flex gap-2" uk-scrollspy="target: > button; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
+                            <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 👍 </span></button>
+                            <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> ❤️ </span></button>
+                            <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😂 </span></button>
+                            <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😯 </span></button>
+                            <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😢 </span></button>
+                        </div>
+
+                        <div class="w-2.5 h-2.5 absolute -bottom-1 left-3 bg-white rotate-45 hidden"></div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button type="button" class="button-icon bg-slate-200/70 dark:bg-slate-700">
+                        <ion-icon class="text-lg md hydrated" name="chatbubble-ellipses" role="img" aria-label="chatbubble ellipses"></ion-icon>
+                    </button>
+                    <span>{{ $post->comments()->count() }}</span>
+                </div>
+                <button type="button" class="button-icon ml-auto">
+                    <ion-icon class="text-xl md hydrated" name="paper-plane-outline" role="img" aria-label="paper plane outline"></ion-icon>
+                </button>
+                <button type="button" class="button-icon">
+                    <ion-icon class="text-xl md hydrated" name="share-outline" role="img" aria-label="share outline"></ion-icon>
+                </button>
+            </div>
+
+            <!-- comments -->
+            @if($post->comments)
+            <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40">
+                @if($post->comments->isNotEmpty())
+                @foreach($post->comments as $comment)
+                <div class="flex items-start gap-3 relative">
+                    <a href=""> <img src="{{ $profileImage ? asset('profile_pictures/' . $profileImage) : asset('backend/images/avatar/black-afro.png') }}" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
+                    <div class="flex-1">
+                        <a href="" class="text-black font-medium inline-block dark:text-white"> {{ $comment->user->name }} </a>
+                        <p class="mt-0.5">{{ $comment->content }}</p>
+                    </div>
+                </div>
+                @endforeach
+                @else
+                <button type="button" class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500 mt-2">
+                    <ion-icon name="chevron-down-outline" class="ml-auto duration-200 group-aria-expanded:rotate-180 md hydrated" role="img" aria-label="chevron down outline"></ion-icon>
+                    No comments yet.
+                </button>
+                @endif
+
+
+                <button type="button" class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500 mt-2">
+                    <ion-icon name="chevron-down-outline" class="ml-auto duration-200 group-aria-expanded:rotate-180 md hydrated" role="img" aria-label="chevron down outline"></ion-icon>
+                    More Comment
+                </button>
+
+            </div>
+            @else
+            <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40">
+                <div class="spinner size-7 animate-spin rounded-full border-[3px] border-slate-500 border-r-transparent dark:border-navy-300 dark:border-r-transparent"> </div>
+                <p>No comments yet.</p>
+            </div>
+            @endif
+
+            <!-- add comment -->
+            <form action="{{ route('smme.community-comments.store', ['prefix' => 'admin', 'postId' => $post->id]) }}" method="POST">
+                @csrf
+                <div class="sm:px-4 sm:py-3 p-2.5 border-t border-gray-100 flex items-center gap-1 dark:border-slate-700/40">
+
+                    <img src="{{ $profileImage ? asset('profile_pictures/' . $profileImage) : asset('backend/images/avatar/black-afro.png') }}" alt="" class="w-6 h-6 rounded-full">
+
+                    <div class="flex-1 relative overflow-hidden h-10">
+
+                        <input class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" type="text" name="content" placeholder="Add a comment..." value="{{ old('content') }}">
+
+
+                        {{-- <textarea placeholder="Add Comment...." rows="1" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" aria-haspopup="true" aria-expanded="false"></textarea> --}}
+                        @error('content')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+
+                        <div class="!top-2 pr-2 uk-drop" uk-drop="pos: bottom-right; mode: click">
+
+
+                            <div class="flex items-center gap-2" uk-scrollspy="target: > svg; cls: uk-animation-slide-right-small; delay: 100 ;repeat: true">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-sky-600" style="opacity: 0;">
+                                    <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 fill-pink-600" style="opacity: 0;">
+                                    <path d="M3.25 4A2.25 2.25 0 001 6.25v7.5A2.25 2.25 0 003.25 16h7.5A2.25 2.25 0 0013 13.75v-7.5A2.25 2.25 0 0010.75 4h-7.5zM19 4.75a.75.75 0 00-1.28-.53l-3 3a.75.75 0 00-.22.53v4.5c0 .199.079.39.22.53l3 3a.75.75 0 001.28-.53V4.75z"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+                    <button type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery"> Reply</button>
+
+                </div>
+            </form>
+
+        </div>
+        @endforeach
+        @endif
+        <div class="card p-4 lg:p-6">
+            <!-- Author -->
+            <div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div x-data="usePopper({
+                       offset: 12,
+                       placement: 'bottom',
+                       modifiers: [
+                          {name: 'preventOverflow', options: {padding: 10}}
+                       ]                     
+                    })" class="flex" @mouseleave="isShowPopper = false" @mouseenter="isShowPopper = true">
+                            <div x-ref="popperRef" class="avatar size-12">
+                                <img class="mask is-squircle" src="images/avatar/avatar-19.jpg" alt="avatar">
+                            </div>
+                            <div x-ref="popperRoot" class="popper-root" :class="isShowPopper &amp;&amp; 'show'" style="position: fixed; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(96px, -1094.4px, 0px);" data-popper-placement="bottom" data-popper-reference-hidden="" data-popper-escaped="">
+                                <div class="popper-box">
+                                    <div class="flex w-48 flex-col items-center rounded-md border border-slate-150 bg-white p-3 text-center dark:border-navy-600 dark:bg-navy-700">
+                                        <div class="avatar size-16">
+                                            <img class="rounded-full" src="images/avatar/avatar-19.jpg" alt="avatar">
+                                        </div>
+                                        <p class="mt-2 font-medium tracking-wide text-slate-700 dark:text-navy-100">
+                                            Travis Fuller
+                                        </p>
+                                        <a href="#" class="font-inter text-xs tracking-wide hover:text-primary focus:text-primary dark:hover:text-accent-light dark:focus:text-accent-light">@travisfuller
+                                        </a>
+                                        <button class="btn mt-4 h-6 rounded-full bg-primary px-4 text-xs font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                                            Follow
+                                        </button>
+                                    </div>
+                                    <div class="size-4" data-popper-arrow="" style="position: absolute; left: 0px; transform: translate3d(88px, 0px, 0px);">
+                                        <svg viewBox="0 0 16 9" xmlns="http://www.w3.org/2000/svg" class="absolute size-4" fill="currentColor">
+                                            <path class="text-slate-150 dark:text-navy-600" d="M1.5 8.357s-.48.624 2.754-4.779C5.583 1.35 6.796.01 8 0c1.204-.009 2.417 1.33 3.76 3.578 3.253 5.43 2.74 4.78 2.74 4.78h-13z"></path>
+                                            <path class="text-white dark:text-navy-700" d="M0 9s1.796-.017 4.67-4.648C5.853 2.442 6.93 1.293 8 1.286c1.07-.008 2.147 1.14 3.343 3.066C14.233 9.006 15.999 9 15.999 9H0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="font-medium text-slate-700 line-clamp-1 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">
+                                Travis Fuller
+                            </a>
+                            <div class="mt-1.5 flex items-center text-xs">
+                                <span class="line-clamp-1">Jun 26</span>
+                                <div class="mx-2 my-0.5 w-px self-stretch bg-white/20"></div>
+                                <p class="shrink-0">8 min red</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-3">
+                        <div class="hidden sm:flex">
+                            <button class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                </svg>
+                            </button>
+                            <button class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                <i class="fab fa-twitter text-base"></i>
+                            </button>
+                            <button class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                <i class="fab fa-linkedin text-base"></i>
+                            </button>
+                            <button class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                <i class="fab fa-instagram text-base"></i>
+                            </button>
+                            <button class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                <i class="fab fa-facebook text-base"></i>
+                            </button>
+                        </div>
+                        <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper &amp;&amp; (isShowPopper = false)" class="inline-flex">
+                            <button x-ref="popperRef" @click="isShowPopper = !isShowPopper" class="btn -mr-1.5 size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                                </svg>
+                            </button>
+
+                            <div x-ref="popperRoot" class="popper-root" :class="isShowPopper &amp;&amp; 'show'" style="position: fixed; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-527.2px, -1110.4px, 0px);" data-popper-placement="bottom-end" data-popper-reference-hidden="" data-popper-escaped="">
+                                <div class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another Action</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something else</a>
+                                        </li>
+                                    </ul>
+                                    <div class="my-1 h-px bg-slate-150 dark:bg-navy-500"></div>
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated Link</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 flex items-center space-x-3 sm:hidden">
+                    <button class="btn space-x-2 rounded-full border border-slate-300 px-4 text-xs+ font-medium text-slate-700 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-100 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5 text-slate-400 dark:text-navy-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                        </svg>
+
+                        <span> Save</span>
+                    </button>
+                    <div class="flex">
+                        <button class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                            <i class="fab fa-twitter text-base"></i>
+                        </button>
+                        <button class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                            <i class="fab fa-linkedin text-base"></i>
+                        </button>
+                        <button class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                            <i class="fab fa-instagram text-base"></i>
+                        </button>
+                        <button class="btn size-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                            <i class="fab fa-facebook text-base"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Post -->
+            <div class="mt-6 font-inter text-base text-slate-600 dark:text-navy-200">
+                <h1 class="text-xl font-medium text-slate-900 dark:text-navy-50 lg:text-2xl">
+                    313 Pattern and Color ideas
+                </h1>
+                <h3 class="mt-1">
+                    Spurred on by my observations at work, I have come up with a
+                    list of things to avoid as a doctor in a hospital setting
+                    (especially for interns and medical students):
+                </h3>
+                <img class="mt-5 h-80 w-full rounded-lg object-cover object-center" src="images/object/object-2.jpg" alt="image">
+                <p class="mt-1 text-center text-xs+ text-slate-400 dark:text-navy-300">
+                    <span> Photo by </span>
+                    <a href="#" class="underline">Unsplash</a>
+                </p>
+                <br>
+                <p>
+                    Major changes have recently occured in my life, both
+                    personally and professionally. We're approaching five years
+                    since the inception of this blog, and going back to read the
+                    posts from May '04 is quite the experience. I suppose its what
+                    diaries and journals are for, the chance to go back and read
+                    out your thoughts and ideas from another time. Kind of like
+                    mental time travel.
+                </p>
+                <br>
+                <p>
+                    One thing is for sure, I am not who I was then. In fact, I am
+                    not who I was last year or the year before that. I may have
+                    some (we shed and create a lot of cells frequently) of the
+                    bodily composition of that person but we are definitely on
+                    different wavelengths.
+                </p>
+                <br>
+                <p>
+                    This whole blogging business started off as a documentation of
+                    odd and quirky ideas I might have. I had a lot of time on my
+                    hands back then, hence the frequency of the posts. With time,
+                    the posts have decreased in number but have also slightly
+                    sharpened in focus. They may still be random and don't
+                    generally adhere to one unified theme, but this thing was
+                    meant to be disjointed and arbitrary anyway.
+                </p>
+                <br>
+                <div class="border-l-4 border-slate-300 pl-4 dark:border-navy-400">
+                    <p class="font-medium italic text-slate-800 dark:text-navy-100">
+                        Why is Tailwind removing the default styles on my h1
+                        elements? How do I disable this? What do you mean I lose all
+                        the other base styles too?
+                    </p>
+                </div>
+                <br>
+                <p>
+                    One thing is for sure, I am not who I was then. In fact, I am
+                    not who I was last year or the year before that. I may have
+                    some (we shed and create a lot of cells frequently) of the
+                    bodily composition of that person but we are definitely on
+                    different wavelengths.
+                </p>
+                <br>
+                <p>
+                    This whole blogging business started off as a documentation of
+                    odd and quirky ideas I might have. I had a lot of time on my
+                    hands back then, hence the frequency of the posts. With time,
+                    the posts have decreased in number but have also slightly
+                    sharpened in focus. They may still be random and don't
+                    generally adhere to one unified theme, but this thing was
+                    meant to be disjointed and arbitrary anyway.
+                </p>
+                <br>
+                <ul class="list-inside list-disc font-medium text-slate-800 dark:text-navy-100">
+                    <li>
+                        Now this is a story all about how, my life got
+                        flipped-turned upside down
+                    </li>
+                    <li>And I'd like to take a minute just sit right there</li>
+                    <li>
+                        I'll tell you how I became the prince of a town called
+                        Bel-Air
+                    </li>
+                </ul>
+                <br>
+                <p>
+                    Major changes have recently occured in my life, both
+                    personally and professionally. We're approaching five years
+                    since the inception of this blog, and going back to read the
+                    posts from May '04 is quite the experience. I suppose its what
+                    diaries and journals are for, the chance to go back and read
+                    out your thoughts and ideas from another time. Kind of like
+                    mental time travel.
+                </p>
+            </div>
+
+            <!-- Footer Blog Post -->
+            <div class="mt-5 flex space-x-3">
+                <button class="btn space-x-2 rounded-full border border-slate-300 px-4 text-xs+ font-medium text-slate-700 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-100 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5 text-slate-400 dark:text-navy-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"></path>
+                    </svg>
+
+                    <span> 235</span>
+                </button>
+                <button class="btn space-x-2 rounded-full border border-slate-300 px-4 text-xs+ font-medium text-slate-700 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-100 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5 text-slate-400 dark:text-navy-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"></path>
+                    </svg>
+
+                    <span> 49</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <div class="flex items-center justify-between">
+                <p class="text-lg font-medium text-slate-800 dark:text-navy-100">
+                    Recent Articles
+                </p>
+                <a href="#" class="border-b border-dotted border-current pb-0.5 text-xs+ font-medium text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70">View All</a>
+            </div>
+            <div class="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-1 lg:gap-6">
+                <div class="card lg:flex-row">
+                    <img class="h-48 w-full shrink-0 rounded-t-lg bg-cover bg-center object-cover object-center lg:h-auto lg:w-48 lg:rounded-t-none lg:rounded-l-lg" src="images/object/object-2.jpg" alt="image">
+                    <div class="flex w-full grow flex-col px-4 py-3 sm:px-5">
+                        <div class="flex items-center justify-between">
+                            <a class="text-xs+ text-info" href="#">Frameworks</a>
+                            <div class="-mr-1.5 flex space-x-1">
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+
+                                <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper &amp;&amp; (isShowPopper = false)" class="inline-flex">
+                                    <button x-ref="popperRef" @click="isShowPopper = !isShowPopper" class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                        </svg>
+                                    </button>
+
+                                    <div x-ref="popperRoot" class="popper-root" :class="isShowPopper &amp;&amp; 'show'" style="position: fixed; inset: auto 0px 0px auto; margin: 0px; transform: translate3d(-523.2px, -78.4px, 0px);" data-popper-placement="top-end">
+                                        <div class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another Action</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something else</a>
+                                                </li>
+                                            </ul>
+                                            <div class="my-1 h-px bg-slate-150 dark:bg-navy-500"></div>
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated Link</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="text-lg font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">What is Tailwind CSS?</a>
+                        </div>
+                        <p class="mt-1 line-clamp-3">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Eveniet, provident quasi recusandae repudiandae rerum
+                            temporibus!
+                        </p>
+                        <div class="grow">
+                            <div class="mt-2 flex items-center text-xs">
+                                <a href="#" class="flex items-center space-x-2 hover:text-slate-800 dark:hover:text-navy-100">
+                                    <div class="avatar size-6">
+                                        <img class="rounded-full" src="images/avatar/avatar-10.jpg" alt="avatar">
+                                    </div>
+                                    <span class="line-clamp-1">John Doe</span>
+                                </a>
+                                <div class="mx-3 my-1 w-px self-stretch bg-slate-200 dark:bg-navy-500"></div>
+                                <span class="shrink-0 text-slate-400 dark:text-navy-300">June 23, 2021
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mt-1 flex justify-end">
+                            <a href="#" class="btn px-2.5 py-1.5 font-medium text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25">
+                                READ ARTICLE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card lg:flex-row">
+                    <img class="h-48 w-full shrink-0 rounded-t-lg bg-cover bg-center object-cover object-center lg:h-auto lg:w-48 lg:rounded-t-none lg:rounded-l-lg" src="images/object/object-3.jpg" alt="image">
+                    <div class="flex w-full grow flex-col px-4 py-3 sm:px-5">
+                        <div class="flex items-center justify-between">
+                            <a class="text-xs+ text-info" href="#">Frameworks</a>
+                            <div class="-mr-1.5 flex space-x-1">
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+
+                                <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper &amp;&amp; (isShowPopper = false)" class="inline-flex">
+                                    <button x-ref="popperRef" @click="isShowPopper = !isShowPopper" class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                        </svg>
+                                    </button>
+
+                                    <div x-ref="popperRoot" class="popper-root" :class="isShowPopper &amp;&amp; 'show'" style="position: fixed; inset: auto 0px 0px auto; margin: 0px; transform: translate3d(-523.2px, 137.6px, 0px);" data-popper-placement="top-end" data-popper-reference-hidden="">
+                                        <div class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another Action</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something else</a>
+                                                </li>
+                                            </ul>
+                                            <div class="my-1 h-px bg-slate-150 dark:bg-navy-500"></div>
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated Link</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="text-lg font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">Tailwind CSS Card Example
+                            </a>
+                        </div>
+                        <p class="mt-1 line-clamp-3">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Est repellat nisi corrupti. Lorem, ipsum.
+                        </p>
+                        <div class="grow">
+                            <div class="mt-2 flex items-center text-xs">
+                                <a href="#" class="flex items-center space-x-2 hover:text-slate-800 dark:hover:text-navy-100">
+                                    <div class="avatar size-6">
+                                        <img class="rounded-full" src="images/avatar/avatar-2.jpg" alt="avatar">
+                                    </div>
+                                    <span class="line-clamp-1">Konnor Guzman </span>
+                                </a>
+                                <div class="mx-3 my-1 w-px self-stretch bg-slate-200 dark:bg-navy-500"></div>
+                                <span class="shrink-0 text-slate-400 dark:text-navy-300">May 25, 2021
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mt-1 flex justify-end">
+                            <a href="#" class="btn px-2.5 py-1.5 font-medium text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25">
+                                READ ARTICLE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card lg:flex-row">
+                    <img class="h-48 w-full shrink-0 rounded-t-lg bg-cover bg-center object-cover object-center lg:h-auto lg:w-48 lg:rounded-t-none lg:rounded-l-lg" src="images/object/object-4.jpg" alt="image">
+                    <div class="flex w-full grow flex-col px-4 py-3 sm:px-5">
+                        <div class="flex items-center justify-between">
+                            <a class="text-xs+ text-info" href="#">Programming Language</a>
+                            <div class="-mr-1.5 flex space-x-1">
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+
+                                <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper &amp;&amp; (isShowPopper = false)" class="inline-flex">
+                                    <button x-ref="popperRef" @click="isShowPopper = !isShowPopper" class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                        </svg>
+                                    </button>
+
+                                    <div x-ref="popperRoot" class="popper-root" :class="isShowPopper &amp;&amp; 'show'" style="position: fixed; inset: auto 0px 0px auto; margin: 0px; transform: translate3d(-523.2px, 353.6px, 0px);" data-popper-placement="top-end" data-popper-reference-hidden="" data-popper-escaped="">
+                                        <div class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another Action</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something else</a>
+                                                </li>
+                                            </ul>
+                                            <div class="my-1 h-px bg-slate-150 dark:bg-navy-500"></div>
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated Link</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="text-lg font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">What is PHP?
+                            </a>
+                        </div>
+                        <p class="mt-1 line-clamp-3">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Eveniet, provident quasi recusandae repudiandae rerum
+                            temporibus!
+                        </p>
+                        <div class="grow">
+                            <div class="mt-2 flex items-center text-xs">
+                                <a href="#" class="flex items-center space-x-2 hover:text-slate-800 dark:hover:text-navy-100">
+                                    <div class="avatar size-6">
+                                        <img class="rounded-full" src="images/avatar/avatar-1.jpg" alt="avatar">
+                                    </div>
+                                    <span class="line-clamp-1">Travis Fuller </span>
+                                </a>
+                                <div class="mx-3 my-1 w-px self-stretch bg-slate-200 dark:bg-navy-500"></div>
+                                <span class="shrink-0 text-slate-400 dark:text-navy-300">March 14, 2022
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mt-1 flex justify-end">
+                            <a href="#" class="btn px-2.5 py-1.5 font-medium text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25">
+                                READ ARTICLE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card lg:flex-row">
+                    <img class="h-48 w-full shrink-0 rounded-t-lg bg-cover bg-center object-cover object-center lg:h-auto lg:w-48 lg:rounded-t-none lg:rounded-l-lg" src="images/object/object-14.jpg" alt="image">
+                    <div class="flex w-full grow flex-col px-4 py-3 sm:px-5">
+                        <div class="flex items-center justify-between">
+                            <a class="text-xs+ text-info" href="#">UI/UX</a>
+                            <div class="-mr-1.5 flex space-x-1">
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+
+                                <div x-data="usePopper({placement:'bottom-end',offset:4})" @click.outside="isShowPopper &amp;&amp; (isShowPopper = false)" class="inline-flex">
+                                    <button x-ref="popperRef" @click="isShowPopper = !isShowPopper" class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                        </svg>
+                                    </button>
+
+                                    <div x-ref="popperRoot" class="popper-root" :class="isShowPopper &amp;&amp; 'show'" style="position: fixed; inset: auto 0px 0px auto; margin: 0px; transform: translate3d(-523.2px, 569.6px, 0px);" data-popper-placement="top-end" data-popper-reference-hidden="" data-popper-escaped="">
+                                        <div class="popper-box rounded-md border border-slate-150 bg-white py-1.5 font-inter dark:border-navy-500 dark:bg-navy-700">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Action</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Another Action</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Something else</a>
+                                                </li>
+                                            </ul>
+                                            <div class="my-1 h-px bg-slate-150 dark:bg-navy-500"></div>
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="flex h-8 items-center px-3 pr-8 font-medium tracking-wide outline-none transition-all hover:bg-slate-100 hover:text-slate-800 focus:bg-slate-100 focus:text-slate-800 dark:hover:bg-navy-600 dark:hover:text-navy-100 dark:focus:bg-navy-600 dark:focus:text-navy-100">Separated Link</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="text-lg font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">Top Design Systems
+                            </a>
+                        </div>
+                        <p class="mt-1 line-clamp-3">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Quidem quibusdam, ipsam in eveniet quod voluptatum!
+                        </p>
+                        <div class="grow">
+                            <div class="mt-2 flex items-center text-xs">
+                                <a href="#" class="flex items-center space-x-2 hover:text-slate-800 dark:hover:text-navy-100">
+                                    <div class="avatar size-6">
+                                        <img class="rounded-full" src="images/avatar/avatar-7.jpg" alt="avatar">
+                                    </div>
+                                    <span class="line-clamp-1">Alfredo Elliott </span>
+                                </a>
+                                <div class="mx-3 my-1 w-px self-stretch bg-slate-200 dark:bg-navy-500"></div>
+                                <span class="shrink-0 text-slate-400 dark:text-navy-300">March 14, 2022
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mt-1 flex justify-end">
+                            <a href="#" class="btn px-2.5 py-1.5 font-medium text-primary hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:text-accent-light dark:hover:bg-accent-light/20 dark:focus:bg-accent-light/20 dark:active:bg-accent-light/25">
+                                READ ARTICLE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-span-12 py-6 lg:sticky lg:bottom-0 lg:col-span-4 lg:self-end">
+        <div class="card">
+            <div class="h-24 rounded-t-lg bg-primary dark:bg-accent">
+                <img class="h-full w-full rounded-t-lg object-cover object-center" src="images/object/object-7.jpg" alt="image">
+            </div>
+            <div class="px-4 pt-2 pb-5 sm:px-5">
+                <div class="avatar -mt-12 size-20">
+                    <img class="rounded-full border-2 border-white dark:border-navy-700" src="images/avatar/avatar-19.jpg" alt="avatar">
+                </div>
+                <h3 class="pt-2 text-lg font-medium text-slate-700 dark:text-navy-100">
+                    Travis Fuller
+                </h3>
+                <p class="text-xs+ text-slate-400 dark:text-navy-300">
+                    1,596 followers
+                </p>
+                <p class="mt-3">
+                    Professional product designer and amateur cyclist living in
+                    New York City, USA.
+                </p>
+                <div class="mt-5 flex space-x-1">
+                    <button class="btn h-7 rounded-full bg-slate-150 px-3 text-xs+ font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+                        Follow
+                    </button>
+                    <button class="btn h-7 w-7 rounded-full bg-slate-150 px-0 text-xs+ font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+                        <i class="far fa-envelope"></i>
+                    </button>
+                    <button class="btn h-7 w-7 rounded-full bg-slate-150 px-0 text-xs+ font-medium text-slate-800 hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200/80 dark:bg-navy-500 dark:text-navy-50 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <p class="border-b border-slate-200 pb-2 text-base text-slate-800 dark:border-navy-600 dark:text-navy-100">
+                More from Travis Fuller
+            </p>
+            <div class="mt-3 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-1">
+                <div class="flex justify-between space-x-2">
+                    <div class="flex flex-1 flex-col justify-between">
+                        <div>
+                            <p class="text-xs font-medium line-clamp-1">06 Nov</p>
+                            <div class="mt-1 text-slate-800 line-clamp-3 dark:text-navy-100">
+                                <a href="#" class="font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">What is Tailwind CSS?</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <p class="text-xs font-medium line-clamp-1">2 min read</p>
+
+                            <div class="flex">
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                                    </svg>
+                                </button>
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="images/object/object-1.jpg" class="size-24 rounded-lg object-cover object-center" alt="image">
+                </div>
+                <div class="flex justify-between space-x-2">
+                    <div class="flex flex-1 flex-col justify-between">
+                        <div>
+                            <p class="text-xs font-medium line-clamp-1">13 Oct</p>
+                            <div class="mt-1 text-slate-800 line-clamp-3 dark:text-navy-100">
+                                <a href="#" class="font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">Top Design Systems</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <p class="text-xs font-medium line-clamp-1">6 min read</p>
+
+                            <div class="flex">
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                                    </svg>
+                                </button>
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="images/object/object-18.jpg" class="size-24 rounded-lg object-cover object-center" alt="image">
+                </div>
+                <div class="flex justify-between space-x-2">
+                    <div class="flex flex-1 flex-col justify-between">
+                        <div>
+                            <p class="text-xs font-medium line-clamp-1">22 Oct</p>
+                            <div class="mt-1 text-slate-800 line-clamp-3 dark:text-navy-100">
+                                <a href="#" class="font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">10 Tips for Making a Good Camera Even Better</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <p class="text-xs font-medium line-clamp-1">8 min read</p>
+
+                            <div class="flex">
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                                    </svg>
+                                </button>
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="images/object/object-16.jpg" class="size-24 rounded-lg object-cover object-center" alt="image">
+                </div>
+                <div class="flex justify-between space-x-2">
+                    <div class="flex flex-1 flex-col justify-between">
+                        <div>
+                            <p class="text-xs font-medium line-clamp-1">01 Nov</p>
+                            <div class="mt-1 text-slate-800 line-clamp-3 dark:text-navy-100">
+                                <a href="#" class="font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">25 Surprising Facts About Chair</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <p class="text-xs font-medium line-clamp-1">
+                                14 min read
+                            </p>
+
+                            <div class="flex">
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path>
+                                    </svg>
+                                </button>
+                                <button class="btn h-7 w-7 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="images/object/object-11.jpg" class="size-24 rounded-lg object-cover object-center" alt="image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div class="lg:flex 2xl:gap-16 gap-12 max-w-[1065px] mx-auto" id="js-oversized">
 
     <div class="max-w-[680px] mx-auto">
 
         <!-- stories -->
-        <div class="mb-8">
-
-            <h3 class="font-extrabold text-2xl  text-black dark:text-white hidden"> Stories</h3>
-
-            <div class="relative uk-slider" tabindex="-1" uk-slider="auto play: true;finite: true" uk-lightbox="">
-
-                <div class="py-5 uk-slider-container">
-
-                    <ul class="uk-slider-items w-[calc(100%+14px)]" uk-scrollspy="target: > li; cls: uk-animation-scale-up; delay: 20;repeat:true" style="transform: translate3d(0px, 0px, 0px);">
-                        <li class="md:pr-3 uk-active uk-scrollspy-inview " uk-scrollspy-class="uk-animation-fade" tabindex="-1" style="">
-                            <div class="md:w-16 md:h-16 w-12 h-12 rounded-full relative border-2 border-dashed grid place-items-center bg-slate-200 border-slate-300 dark:border-slate-700 dark:bg-dark2 shrink-0" uk-toggle="target: #create-story" tabindex="0" aria-expanded="false">
-                                <ion-icon name="camera" class="text-2xl md hydrated" role="img" aria-label="camera"></ion-icon>
-                            </div>
-                        </li>
-                        <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300 uk-active uk-scrollspy-inview " tabindex="-1" style="">
-                            <a href="assets/images/avatars/avatar-lg-1.jpg" data-caption="Caption 1">
-                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
-                                    <img src="assets/images/avatars/avatar-2.jpg" alt="" class="absolute w-full h-full object-cover">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300 uk-active uk-scrollspy-inview " tabindex="-1" style="">
-                            <a href="assets/images/avatars/avatar-lg-2.jpg" data-caption="Caption 1">
-                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
-                                    <img src="assets/images/avatars/avatar-3.jpg" alt="" class="absolute w-full h-full object-cover">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300 uk-active uk-scrollspy-inview " tabindex="-1" style="">
-                            <a href="assets/images/avatars/avatar-lg-4.jpg" data-caption="Caption 1">
-                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
-                                    <img src="assets/images/avatars/avatar-5.jpg" alt="" class="absolute w-full h-full object-cover">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300 uk-active uk-scrollspy-inview " tabindex="-1" style="">
-                            <a href="assets/images/avatars/avatar-lg-5.jpg" data-caption="Caption 1">
-                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
-                                    <img src="assets/images/avatars/avatar-6.jpg" alt="" class="absolute w-full h-full object-cover">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300 uk-active uk-scrollspy-inview " tabindex="-1" style="">
-                            <a href="assets/images/avatars/avatar-lg-1.jpg" data-caption="Caption 1">
-                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
-                                    <img src="assets/images/avatars/avatar-7.jpg" alt="" class="absolute w-full h-full object-cover">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300 uk-active uk-scrollspy-inview " tabindex="-1" style="">
-                            <a href="assets/images/avatars/avatar-lg-1.jpg" data-caption="Caption 1">
-                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
-                                    <img src="assets/images/avatars/avatar-2.jpg" alt="" class="absolute w-full h-full object-cover">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300 uk-active uk-scrollspy-inview " tabindex="-1" style="">
-                            <a href="assets/images/avatars/avatar-lg-2.jpg" data-caption="Caption 1">
-                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
-                                    <img src="assets/images/avatars/avatar-3.jpg" alt="" class="absolute w-full h-full object-cover">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300 uk-active uk-scrollspy-inview " tabindex="-1" style="">
-                            <a href="assets/images/avatars/avatar-lg-4.jpg" data-caption="Caption 1">
-                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
-                                    <img src="assets/images/avatars/avatar-5.jpg" alt="" class="absolute w-full h-full object-cover">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300" tabindex="-1" style="opacity: 0;">
-                            <a href="assets/images/avatars/avatar-lg-5.jpg" data-caption="Caption 1">
-                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
-                                    <img src="assets/images/avatars/avatar-6.jpg" alt="" class="absolute w-full h-full object-cover">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="md:pr-3 pr-2 hover:scale-[1.15] hover:-rotate-2 duration-300" tabindex="-1" style="opacity: 0;">
-                            <a href="assets/images/avatars/avatar-lg-1.jpg" data-caption="Caption 1">
-                                <div class="md:w-16 md:h-16 w-12 h-12 relative md:border-4 border-2 shadow border-white rounded-full overflow-hidden dark:border-slate-700">
-                                    <img src="assets/images/avatars/avatar-7.jpg" alt="" class="absolute w-full h-full object-cover">
-                                </div>
-                            </a>
-                        </li>
-                        <li class="md:pr-3 pr-2" tabindex="-1" style="opacity: 0;">
-                            <div class="md:w-16 md:h-16 w-12 h-12 bg-slate-200/60 rounded-full dark:bg-dark2 animate-pulse"></div>
-                        </li>
-                    </ul>
-
-                </div>
-
-                <div class="max-md:hidden">
-
-                    <button type="button" class="absolute -translate-y-1/2 bg-white shadow rounded-full top-1/2 -left-3.5 grid w-8 h-8 place-items-center dark:bg-dark3 uk-invisible" uk-slider-item="previous">
-                        <ion-icon name="chevron-back" class="text-2xl md hydrated" role="img" aria-label="chevron back"></ion-icon>
-                    </button>
-                    <button type="button" class="absolute -right-2 -translate-y-1/2 bg-white shadow rounded-full top-1/2 grid w-8 h-8 place-items-center dark:bg-dark3" uk-slider-item="next">
-                        <ion-icon name="chevron-forward" class="text-2xl md hydrated" role="img" aria-label="chevron forward"></ion-icon>
-                    </button>
-
-                </div>
 
 
-            </div>
-
-        </div>
 
         <!-- feed story -->
-        <div class="md:max-w-[580px] mx-auto flex-1 xl:space-y-6 space-y-3">
+        <div class="md:max-w-[580px] mx-auto flex-1 xl:space-y-6 space-y-3 ">
 
             <!-- add story -->
-            <div class="bg-white rounded-xl shadow-sm md:p-4 p-2 space-y-4 text-sm font-medium border1 dark:bg-dark2">
 
-                <div class="flex items-center md:gap-3 gap-1">
-                    <div class="flex-1 bg-slate-100 hover:bg-opacity-80 transition-all rounded-lg cursor-pointer dark:bg-dark3" uk-toggle="target: #create-status" tabindex="0" aria-expanded="false">
-                        <div class="py-2.5 text-center dark:text-white"> What do you have in mind? </div>
-                    </div>
-                    <div class="cursor-pointer hover:bg-opacity-80 p-1 px-1.5 rounded-xl transition-all bg-pink-100/60 hover:bg-pink-100 dark:bg-white/10 dark:hover:bg-white/20" uk-toggle="target: #create-status" tabindex="0" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 stroke-pink-600 fill-pink-200/70" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M15 8h.01"></path>
-                            <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"></path>
-                            <path d="M3.5 15.5l4.5 -4.5c.928 -.893 2.072 -.893 3 0l5 5"></path>
-                            <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l2.5 2.5"></path>
-                        </svg>
-                    </div>
-                    <div class="cursor-pointer hover:bg-opacity-80 p-1 px-1.5 rounded-xl transition-all bg-sky-100/60 hover:bg-sky-100 dark:bg-white/10 dark:hover:bg-white/20" uk-toggle="target: #create-status" tabindex="0" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 stroke-sky-600 fill-sky-200/70 " viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z"></path>
-                            <path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
-                        </svg>
-                    </div>
-                </div>
 
-            </div>
 
-            <!--  post image-->
-            @if($posts->isEmpty())
-            <p>No posts available.</p>
-            <div class="rounded-xl shadow-sm p-4 space-y-4 bg-slate-200/40 animate-pulse border1 dark:bg-dark2">
 
-                <div class="flex gap-3">
-                    <div class="w-9 h-9 rounded-full bg-slate-300/20"></div>
-                    <div class="flex-1 space-y-3">
-                        <div class="w-40 h-5 rounded-md bg-slate-300/20"></div>
-                        <div class="w-24 h-4 rounded-md bg-slate-300/20"></div>
-                    </div>
-                    <div class="w-6 h-6 rounded-full bg-slate-300/20"></div>
-                </div>
-
-                <div class="w-full h-52 rounded-lg bg-slate-300/10 my-3"> </div>
-
-                <div class="flex gap-3">
-
-                    <div class="w-16 h-5 rounded-md bg-slate-300/20"></div>
-
-                    <div class="w-14 h-5 rounded-md bg-slate-300/20"></div>
-
-                    <div class="w-6 h-6 rounded-full bg-slate-300/20 ml-auto"></div>
-                    <div class="w-6 h-6 rounded-full bg-slate-300/20  "></div>
-                </div>
-
-            </div>
-            @else
-            @foreach($posts as $post)
-            <div class="bg-white rounded-xl shadow-sm text-sm font-medium border1 dark:bg-dark2">
-
-                <!-- post heading -->
-                <div class="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
-                    <a href="timeline.html"> <img src="assets/images/avatars/avatar-3.jpg" alt="" class="w-9 h-9 rounded-full"> </a>
-                    <div class="flex-1">
-                        <a href="timeline.html">
-                            <h4 class="text-black dark:text-white"> {{ $post->user->name }} </h4>
-                        </a>
-                        <div class="text-xs text-gray-500 dark:text-white/80"> {{ $post->created_at->format('M d, Y') }}</div>
-                    </div>
-
-
-
-                    <div class="-mr-1">
-                        <button type="button" class="button-icon w-8 h-8" aria-haspopup="true" aria-expanded="false">
-                            <ion-icon class="text-xl md hydrated" name="ellipsis-horizontal" role="img" aria-label="ellipsis horizontal"></ion-icon>
-                        </button>
-                        <div class="w-[245px] uk-dropdown" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
-                            <nav>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="bookmark-outline" role="img" aria-label="bookmark outline"></ion-icon> Add to favorites
-                                </a>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="notifications-off-outline" role="img" aria-label="notifications off outline"></ion-icon> Mute Notification
-                                </a>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="flag-outline" role="img" aria-label="flag outline"></ion-icon> Report this post
-                                </a>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="share-outline" role="img" aria-label="share outline"></ion-icon> Share your profile
-                                </a>
-                                <hr>
-                                <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="stop-circle-outline" role="img" aria-label="stop circle outline"></ion-icon> Unfollow
-                                </a>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sm:px-4 p-2.5 pt-0">
-                    <p class="font-normal"> {{ $post->content }}</p>
-                </div>
-
-                <!-- post image -->
-                <a href="#preview_modal" uk-toggle="" aria-expanded="false">
-                    @if($post->post_image)
-                    <div class="relative w-full lg:h-96 h-full sm:px-4">
-                        <img src="{{ Storage::url($post->post_image) }}" alt="" class="sm:rounded-lg w-full h-full object-cover">
-                    </div>
-                    @endif
-                </a>
-
-                <!-- post icons -->
-                <div class="sm:p-4 p-2.5 flex items-center gap-4 text-xs font-semibold">
-                    <div>
-                        <div class="flex items-center gap-2.5" tabindex="0" aria-haspopup="true" aria-expanded="false">
-                            <form id="like-form-{{ $post->id }}" action="{{ route('smme.community-likes.store', ['prefix' => 'admin']) }}" method="POST" class="d-inline">
-                                @csrf
-                                <input type="hidden" name="likeable_id" value="{{ $post->id }}">
-                                <input type="hidden" name="likeable_type" value="{{ get_class($post) }}">
-                                <button onclick="document.getElementById('like-form-{{ $post->id }}').submit();" type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700">
-                                    <ion-icon class="text-lg md hydrated" name="heart" role="img" aria-label="heart"></ion-icon>
-                                </button>
-                            </form>
-                            <a href="#">{{ $post->likes->count() }}</a>
-                        </div>
-                        <div class="p-1 px-2 bg-white rounded-full drop-shadow-md w-[212px] dark:bg-slate-700 text-2xl uk-drop" uk-drop="offset:10;pos: top-left; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-bottom-left">
-
-                            <div class="flex gap-2" uk-scrollspy="target: > button; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 👍 </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> ❤️ </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😂 </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😯 </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😢 </span></button>
-                            </div>
-
-                            <div class="w-2.5 h-2.5 absolute -bottom-1 left-3 bg-white rotate-45 hidden"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <button type="button" class="button-icon bg-slate-200/70 dark:bg-slate-700">
-                            <ion-icon class="text-lg md hydrated" name="chatbubble-ellipses" role="img" aria-label="chatbubble ellipses"></ion-icon>
-                        </button>
-                        <span>{{ $post->comments()->count() }}</span>
-                    </div>
-                    <button type="button" class="button-icon ml-auto">
-                        <ion-icon class="text-xl md hydrated" name="paper-plane-outline" role="img" aria-label="paper plane outline"></ion-icon>
-                    </button>
-                    <button type="button" class="button-icon">
-                        <ion-icon class="text-xl md hydrated" name="share-outline" role="img" aria-label="share outline"></ion-icon>
-                    </button>
-                </div>
-
-                <!-- comments -->
-                @if($post->comments)
-                <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40">
-                    @if($post->comments->isNotEmpty())
-                    @foreach($post->comments as $comment)
-                    <div class="flex items-start gap-3 relative">
-                        <a href=""> <img src="assets/images/avatars/avatar-2.jpg" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
-                        <div class="flex-1">
-                            <a href="" class="text-black font-medium inline-block dark:text-white"> {{ $comment->user->name }} </a>
-                            <p class="mt-0.5">{{ $comment->content }}</p>
-                        </div>
-                    </div>
-                    @endforeach
-                    @else
-                    <button type="button" class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500 mt-2">
-                        <ion-icon name="chevron-down-outline" class="ml-auto duration-200 group-aria-expanded:rotate-180 md hydrated" role="img" aria-label="chevron down outline"></ion-icon>
-                        No comments yet.
-                    </button>
-                    @endif
-
-
-                    <button type="button" class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500 mt-2">
-                        <ion-icon name="chevron-down-outline" class="ml-auto duration-200 group-aria-expanded:rotate-180 md hydrated" role="img" aria-label="chevron down outline"></ion-icon>
-                        More Comment
-                    </button>
-
-                </div>
-                @else
-                <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40">
-                    <div class="spinner size-7 animate-spin rounded-full border-[3px] border-slate-500 border-r-transparent dark:border-navy-300 dark:border-r-transparent"> </div>
-                    <p>No comments yet.</p>
-                </div>
-                @endif
-
-                <!-- add comment -->
-                <form action="{{ route('smme.community-comments.store', ['prefix' => 'admin', 'postId' => $post->id]) }}" method="POST">
-                    @csrf
-                    <div class="sm:px-4 sm:py-3 p-2.5 border-t border-gray-100 flex items-center gap-1 dark:border-slate-700/40">
-
-                        <img src="assets/images/avatars/avatar-7.jpg" alt="" class="w-6 h-6 rounded-full">
-
-                        <div class="flex-1 relative overflow-hidden h-10">
-
-                            <input class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" type="text" name="content" placeholder="Add a comment..." value="{{ old('content') }}">
-
-
-                            {{-- <textarea placeholder="Add Comment...." rows="1" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" aria-haspopup="true" aria-expanded="false"></textarea> --}}
-                            @error('content')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-
-                            <div class="!top-2 pr-2 uk-drop" uk-drop="pos: bottom-right; mode: click">
-
-
-                                <div class="flex items-center gap-2" uk-scrollspy="target: > svg; cls: uk-animation-slide-right-small; delay: 100 ;repeat: true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-sky-600" style="opacity: 0;">
-                                        <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 fill-pink-600" style="opacity: 0;">
-                                        <path d="M3.25 4A2.25 2.25 0 001 6.25v7.5A2.25 2.25 0 003.25 16h7.5A2.25 2.25 0 0013 13.75v-7.5A2.25 2.25 0 0010.75 4h-7.5zM19 4.75a.75.75 0 00-1.28-.53l-3 3a.75.75 0 00-.22.53v4.5c0 .199.079.39.22.53l3 3a.75.75 0 001.28-.53V4.75z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-
-
-
-
-                        </div>
-
-
-                        <button type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery"> Replay</button>
-
-                    </div>
-                </form>
-
-            </div>
-            @endforeach
-            @endif
-
-            <!--  post image with slider-->
-            {{-- <div class="bg-white rounded-xl shadow-sm text-sm font-medium border1 dark:bg-dark2">
-
-                <!-- post heading -->
-                <div class="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
-                    <a href="timeline.html"> <img src="assets/images/avatars/avatar-3.jpg" alt="" class="w-9 h-9 rounded-full"> </a>
-                    <div class="flex-1">
-                        <a href="timeline.html">
-                            <h4 class="text-black dark:text-white"> Monroe Parker </h4>
-                        </a>
-                        <div class="text-xs text-gray-500 dark:text-white/80"> 2 hours ago</div>
-                    </div>
-
-                    <div class="-mr-1">
-                        <button type="button" class="button-icon w-8 h-8" aria-haspopup="true" aria-expanded="false">
-                            <ion-icon class="text-xl md hydrated" name="ellipsis-horizontal" role="img" aria-label="ellipsis horizontal"></ion-icon>
-                        </button>
-                        <div class="w-[245px] uk-dropdown" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
-                            <nav>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="bookmark-outline" role="img" aria-label="bookmark outline"></ion-icon> Add to favorites
-                                </a>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="notifications-off-outline" role="img" aria-label="notifications off outline"></ion-icon> Mute Notification
-                                </a>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="flag-outline" role="img" aria-label="flag outline"></ion-icon> Report this post
-                                </a>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="share-outline" role="img" aria-label="share outline"></ion-icon> Share your profile
-                                </a>
-                                <hr>
-                                <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="stop-circle-outline" role="img" aria-label="stop circle outline"></ion-icon> Unfollow
-                                </a>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- post image -->
-                <div class="relative uk-visible-toggle sm:px-4 uk-slideshow" tabindex="-1" uk-slideshow="animation: push;ratio: 4:3">
-
-                    <ul class="uk-slideshow-items overflow-hidden rounded-xl" uk-lightbox="animation: fade" style="min-height: 409.5px;">
-                        <li class="w-full uk-active uk-transition-active" tabindex="-1" style="transform: translate3d(0px, 0px, 0px); z-index: 0;">
-                            <a class="inline" href="https://getuikit.com/docs/images/photo3.jpg" data-caption="Caption 1">
-                                <img src="assets/images/post/img-2.jpg" alt="" class="w-full h-full absolute object-cover insta-0">
-                            </a>
-                        </li>
-                        <li class="w-full" tabindex="-1">
-                            <a class="inline" href="https://getuikit.com/docs/images/photo2.jpg" data-caption="Caption 2">
-                                <img src="assets/images/post/img-3.jpg" alt="" class="w-full h-full absolute object-cover insta-0">
-                            </a>
-                        </li>
-                        <li class="w-full" tabindex="-1">
-                            <a class="inline" href="https://getuikit.com/docs/images/photo.jpg" data-caption="Caption 3">
-                                <img src="assets/images/post/img-4.jpg" alt="" class="w-full h-full absolute object-cover insta-0">
-                            </a>
-                        </li>
-                    </ul>
-
-                    <a class="nav-prev left-6" href="#" uk-slideshow-item="previous">
-                        <ion-icon name="chevron-back" class="text-2xl md hydrated" role="img" aria-label="chevron back"></ion-icon>
-                    </a>
-                    <a class="nav-next right-6" href="#" uk-slideshow-item="next">
-                        <ion-icon name="chevron-forward" class="text-2xl md hydrated" role="img" aria-label="chevron forward"></ion-icon>
-                    </a>
-
-                </div>
-
-                <!-- post icons -->
-                <div class="sm:p-4 p-2.5 flex items-center gap-4 text-xs font-semibold">
-                    <div>
-                        <div class="flex items-center gap-2.5" tabindex="0" aria-haspopup="true" aria-expanded="false">
-                            <button type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700">
-                                <ion-icon class="text-lg md hydrated" name="heart" role="img" aria-label="heart"></ion-icon>
-                            </button>
-                            <a href="#">1,300</a>
-                        </div>
-                        <div class="p-1 px-2 bg-white rounded-full drop-shadow-md w-[212px] dark:bg-slate-700 text-2xl uk-drop" uk-drop="offset:10;pos: top-left; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-bottom-left">
-
-                            <div class="flex gap-2" uk-scrollspy="target: > button; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 👍 </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> ❤️ </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😂 </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😯 </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😢 </span></button>
-                            </div>
-
-                            <div class="w-2.5 h-2.5 absolute -bottom-1 left-3 bg-white rotate-45 hidden"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <button type="button" class="button-icon bg-slate-200/70 dark:bg-slate-700">
-                            <ion-icon class="text-lg md hydrated" name="chatbubble-ellipses" role="img" aria-label="chatbubble ellipses"></ion-icon>
-                        </button>
-                        <span>260</span>
-                    </div>
-                    <button type="button" class="button-icon ml-auto">
-                        <ion-icon class="text-xl md hydrated" name="paper-plane-outline" role="img" aria-label="paper plane outline"></ion-icon>
-                    </button>
-                    <button type="button" class="button-icon">
-                        <ion-icon class="text-xl md hydrated" name="share-outline" role="img" aria-label="share outline"></ion-icon>
-                    </button>
-                </div>
-
-                <!-- comments -->
-                <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40">
-
-                    <div class="flex items-start gap-3 relative">
-                        <a href="timeline.html"> <img src="assets/images/avatars/avatar-2.jpg" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
-                        <div class="flex-1">
-                            <a href="timeline.html" class="text-black font-medium inline-block dark:text-white"> Steeve </a>
-                            <p class="mt-0.5">What a beautiful photo! I love it. 😍 </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <a href="timeline.html"> <img src="assets/images/avatars/avatar-3.jpg" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
-                        <div class="flex-1">
-                            <a href="timeline.html" class="text-black font-medium inline-block dark:text-white"> Monroe </a>
-                            <p class="mt-0.5"> You captured the moment.😎 </p>
-                        </div>
-                    </div>
-
-                    <button type="button" class="flex items-center gap-1.5 text-gray-500 hover:text-blue-500 mt-2">
-                        <ion-icon name="chevron-down-outline" class="ml-auto duration-200 group-aria-expanded:rotate-180 md hydrated" role="img" aria-label="chevron down outline"></ion-icon>
-                        More Comment
-                    </button>
-
-                </div>
-
-                <!-- add comment -->
-                <div class="sm:px-4 sm:py-3 p-2.5 border-t border-gray-100 flex items-center gap-1 dark:border-slate-700/40">
-
-                    <img src="assets/images/avatars/avatar-7.jpg" alt="" class="w-6 h-6 rounded-full">
-
-                    <div class="flex-1 relative overflow-hidden h-10">
-                        <textarea placeholder="Add Comment...." rows="1" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" aria-haspopup="true" aria-expanded="false"></textarea>
-
-                        <div class="!top-2 pr-2 uk-drop" uk-drop="pos: bottom-right; mode: click">
-                            <div class="flex items-center gap-2" uk-scrollspy="target: > svg; cls: uk-animation-slide-right-small; delay: 100 ;repeat: true">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-sky-600" style="opacity: 0;">
-                                    <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 fill-pink-600" style="opacity: 0;">
-                                    <path d="M3.25 4A2.25 2.25 0 001 6.25v7.5A2.25 2.25 0 003.25 16h7.5A2.25 2.25 0 0013 13.75v-7.5A2.25 2.25 0 0010.75 4h-7.5zM19 4.75a.75.75 0 00-1.28-.53l-3 3a.75.75 0 00-.22.53v4.5c0 .199.079.39.22.53l3 3a.75.75 0 001.28-.53V4.75z"></path>
-                                </svg>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-                    <button type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery"> Replay</button>
-                </div>
-
-            </div> --}}
-
-            <!-- post text-->
-            {{-- <div class="bg-white rounded-xl shadow-sm text-sm font-medium border1 dark:bg-dark2">
-
-                <!-- post heading -->
-                <div class="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
-                    <a href="timeline.html"> <img src="assets/images/avatars/avatar-5.jpg" alt="" class="w-9 h-9 rounded-full"> </a>
-                    <div class="flex-1">
-                        <a href="timeline.html">
-                            <h4 class="text-black dark:text-white"> John Michael </h4>
-                        </a>
-                        <div class="text-xs text-gray-500 dark:text-white/80"> 2 hours ago</div>
-                    </div>
-
-                    <div class="-mr-1">
-                        <button type="button" class="button__ico w-8 h-8" aria-haspopup="true" aria-expanded="false">
-                            <ion-icon class="text-xl md hydrated" name="ellipsis-horizontal" role="img" aria-label="ellipsis horizontal"></ion-icon>
-                        </button>
-                        <div class="w-[245px] uk-dropdown" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
-                            <nav>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="bookmark-outline" role="img" aria-label="bookmark outline"></ion-icon> Add to favorites
-                                </a>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="notifications-off-outline" role="img" aria-label="notifications off outline"></ion-icon> Mute Notification
-                                </a>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="flag-outline" role="img" aria-label="flag outline"></ion-icon> Report this post
-                                </a>
-                                <a href="#">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="share-outline" role="img" aria-label="share outline"></ion-icon> Share your profile
-                                </a>
-                                <hr>
-                                <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50">
-                                    <ion-icon class="text-xl shrink-0 md hydrated" name="stop-circle-outline" role="img" aria-label="stop circle outline"></ion-icon> Unfollow
-                                </a>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sm:px-4 p-2.5 pt-0">
-                    <p class="font-normal"> Photography is the art of capturing light with a camera. It can be used to create images that tell stories, express emotions, or document reality. it can be fun, challenging, or rewarding. It can also be a hobby, a profession, or a passion. 📷 </p>
-                </div>
-
-                <!-- post icons -->
-                <div class="sm:p-4 p-2.5 flex items-center gap-4 text-xs font-semibold">
-                    <div>
-                        <div class="flex items-center gap-2.5" tabindex="0" aria-haspopup="true" aria-expanded="false">
-                            <button type="button" class="button-icon text-red-500 bg-red-100 dark:bg-slate-700">
-                                <ion-icon class="text-lg md hydrated" name="heart" role="img" aria-label="heart"></ion-icon>
-                            </button>
-                            <a href="#">1,300</a>
-                        </div>
-                        <div class="p-1 px-2 bg-white rounded-full drop-shadow-md w-[212px] dark:bg-slate-700 text-2xl uk-drop" uk-drop="offset:10;pos: top-left; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-bottom-left">
-
-                            <div class="flex gap-2" uk-scrollspy="target: > button; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 👍 </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> ❤️ </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😂 </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😯 </span></button>
-                                <button type="button" class="text-red-600 hover:scale-125 duration-300" style="opacity: 0;"> <span> 😢 </span></button>
-                            </div>
-
-                            <div class="w-2.5 h-2.5 absolute -bottom-1 left-3 bg-white rotate-45 hidden"></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <button type="button" class="button-icon bg-slate-200/70 dark:bg-slate-700">
-                            <ion-icon class="text-lg md hydrated" name="chatbubble-ellipses" role="img" aria-label="chatbubble ellipses"></ion-icon>
-                        </button>
-                        <span>260</span>
-                    </div>
-                    <button type="button" class="button-icon ml-auto">
-                        <ion-icon class="text-xl md hydrated" name="paper-plane-outline" role="img" aria-label="paper plane outline"></ion-icon>
-                    </button>
-                    <button type="button" class="button-icon">
-                        <ion-icon class="text-xl md hydrated" name="share-outline" role="img" aria-label="share outline"></ion-icon>
-                    </button>
-                </div>
-
-                <!-- comments -->
-                <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40">
-
-                    <div class="flex items-start gap-3 relative">
-                        <a href="timeline.html"> <img src="assets/images/avatars/avatar-2.jpg" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
-                        <div class="flex-1">
-                            <a href="timeline.html" class="text-black font-medium inline-block dark:text-white"> Steeve </a>
-                            <p class="mt-0.5"> I love taking photos of nature and animals. 🌳🐶</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <a href="timeline.html"> <img src="assets/images/avatars/avatar-3.jpg" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
-                        <div class="flex-1">
-                            <a href="timeline.html" class="text-black font-medium inline-block dark:text-white"> Monroe </a>
-                            <p class="mt-0.5"> I enjoy people and emotions. 😊😢 </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 relative">
-                        <a href="timeline.html"> <img src="assets/images/avatars/avatar-5.jpg" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
-                        <div class="flex-1">
-                            <a href="timeline.html" class="text-black font-medium inline-block dark:text-white"> Jesse </a>
-                            <p class="mt-0.5"> Photography is my passion. 🎨📸 </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- add comment -->
-                <div class="sm:px-4 sm:py-3 p-2.5 border-t border-gray-100 flex items-center gap-1 dark:border-slate-700/40">
-
-                    <img src="assets/images/avatars/avatar-7.jpg" alt="" class="w-6 h-6 rounded-full">
-
-                    <div class="flex-1 relative overflow-hidden h-10">
-                        <textarea placeholder="Add Comment...." rows="1" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" aria-haspopup="true" aria-expanded="false"></textarea>
-
-                        <div class="!top-2 pr-2 uk-drop" uk-drop="pos: bottom-right; mode: click">
-                            <div class="flex items-center gap-2" uk-scrollspy="target: > svg; cls: uk-animation-slide-right-small; delay: 100 ;repeat: true">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-sky-600" style="opacity: 0;">
-                                    <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 fill-pink-600" style="opacity: 0;">
-                                    <path d="M3.25 4A2.25 2.25 0 001 6.25v7.5A2.25 2.25 0 003.25 16h7.5A2.25 2.25 0 0013 13.75v-7.5A2.25 2.25 0 0010.75 4h-7.5zM19 4.75a.75.75 0 00-1.28-.53l-3 3a.75.75 0 00-.22.53v4.5c0 .199.079.39.22.53l3 3a.75.75 0 001.28-.53V4.75z"></path>
-                                </svg>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-                    <button type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery"> Replay</button>
-                </div>
-
-            </div> --}}
-
-            <!-- placeholder -->
 
 
         </div>
 
     </div>
 
-    <!-- sidebar -->
-    <div class="flex-1">
 
-        <div class="lg:space-y-4 lg:pb-8 max-lg:grid sm:grid-cols-2 max-lg:gap-6 uk-sticky uk-active uk-sticky-fixed" uk-sticky="media: 1024; end: #js-oversized; offset: 80" style="position: fixed; top: 80px; width: 337px;">
-
-            <div class="box p-5 px-6">
-
-                <div class="flex items-baseline justify-between text-black dark:text-white">
-                    <h3 class="font-bold text-base"> People you may know </h3>
-                    <a href="#" class="text-sm text-blue-500">See all</a>
-                </div>
-
-                <div class="side-list">
-
-                    <div class="side-list-item">
-                        <a href="timeline.html">
-                            <img src="assets/images/avatars/avatar-2.jpg" alt="" class="side-list-image rounded-full">
-                        </a>
-                        <div class="flex-1">
-                            <a href="timeline.html">
-                                <h4 class="side-list-title"> John Michael </h4>
-                            </a>
-                            <div class="side-list-info"> 125k Following </div>
-                        </div>
-                        <button class="button bg-primary-soft text-primary dark:text-white" style="color: white !important">follow</button>
-                    </div>
-
-
-
-                    <button class="bg-secondery button w-full mt-2 hidden">See all</button>
-
-                </div>
-
-            </div>
-
-            <!-- peaple you might know -->
-            <div class="box p-5 px-6 border1 dark:bg-dark2 hidden">
-
-                <div class="flex justify-between text-black dark:text-white">
-                    <h3 class="font-bold text-base"> Peaple You might know </h3>
-                    <button type="button">
-                        <ion-icon name="sync-outline" class="text-xl md hydrated" role="img" aria-label="sync outline"></ion-icon>
-                    </button>
-                </div>
-
-                <div class="space-y-4 capitalize text-xs font-normal mt-5 mb-2 text-gray-500 dark:text-white/80">
-
-                    <div class="flex items-center gap-3">
-                        <a href="timeline.html">
-                            <img src="assets/images/avatars/avatar-7.jpg" alt="" class="bg-gray-200 rounded-full w-10 h-10">
-                        </a>
-                        <div class="flex-1">
-                            <a href="timeline.html">
-                                <h4 class="font-semibold text-sm text-black dark:text-white"> Johnson smith</h4>
-                            </a>
-                            <div class="mt-0.5"> Suggested For You </div>
-                        </div>
-                        <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <a href="timeline.html">
-                            <img src="assets/images/avatars/avatar-5.jpg" alt="" class="bg-gray-200 rounded-full w-10 h-10">
-                        </a>
-                        <div class="flex-1">
-                            <a href="timeline.html">
-                                <h4 class="font-semibold text-sm text-black dark:text-white"> James Lewis</h4>
-                            </a>
-                            <div class="mt-0.5"> Followed by Johnson </div>
-                        </div>
-                        <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <a href="timeline.html">
-                            <img src="assets/images/avatars/avatar-2.jpg" alt="" class="bg-gray-200 rounded-full w-10 h-10">
-                        </a>
-                        <div class="flex-1">
-                            <a href="timeline.html">
-                                <h4 class="font-semibold text-sm text-black dark:text-white"> John Michael</h4>
-                            </a>
-                            <div class="mt-0.5"> Followed by Monroe </div>
-                        </div>
-                        <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <a href="timeline.html">
-                            <img src="assets/images/avatars/avatar-3.jpg" alt="" class="bg-gray-200 rounded-full w-10 h-10">
-                        </a>
-                        <div class="flex-1">
-                            <a href="timeline.html">
-                                <h4 class="font-semibold text-sm text-black dark:text-white"> Monroe Parker</h4>
-                            </a>
-                            <div class="mt-0.5"> Suggested For You </div>
-                        </div>
-                        <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <a href="timeline.html">
-                            <img src="assets/images/avatars/avatar-4.jpg" alt="" class="bg-gray-200 rounded-full w-10 h-10">
-                        </a>
-                        <div class="flex-1">
-                            <a href="timeline.html">
-                                <h4 class="font-semibold text-sm text-black dark:text-white"> Martin Gray</h4>
-                            </a>
-                            <div class="mt-0.5"> Suggested For You </div>
-                        </div>
-                        <button type="button" class="text-sm rounded-full py-1.5 px-4 font-semibold bg-secondery"> Follow </button>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <!-- latest marketplace items -->
-            <div class="box p-5 px-6 border1 dark:bg-dark2">
-
-                <div class="flex justify-between text-black dark:text-white">
-                    <h3 class="font-bold text-base"> Premium Photos </h3>
-                    <button type="button">
-                        <ion-icon name="sync-outline" class="text-xl md hydrated" role="img" aria-label="sync outline"></ion-icon>
-                    </button>
-                </div>
-
-                <div class="relative capitalize font-medium text-sm text-center mt-4 mb-2 uk-slider" tabindex="-1" uk-slider="autoplay: true;finite: true">
-
-                    <div class="overflow-hidden uk-slider-container">
-
-                        <ul class="-ml-2 uk-slider-items w-[calc(100%+0.5rem)]" style="transform: translate3d(-147.5px, 0px, 0px);">
-
-                            <li class="w-1/2 pr-2" tabindex="-1">
-
-                                <a href="#">
-                                    <div class="relative overflow-hidden rounded-lg">
-                                        <div class="relative w-full h-40">
-                                            <img src="assets/images/product/product-1.jpg" alt="" class="object-cover w-full h-full inset-0">
-                                        </div>
-                                        <div class="absolute right-0 top-0 m-2 bg-white/60 rounded-full py-0.5 px-2 text-sm font-semibold dark:bg-slate-800/60"> $12 </div>
-                                    </div>
-                                    <div class="mt-3 w-full"> Chill Lotion </div>
-                                </a>
-                            </li>
-                            <li class="w-1/2 pr-2 uk-active" tabindex="-1">
-
-                                <a href="#">
-                                    <div class="relative overflow-hidden rounded-lg">
-                                        <div class="relative w-full h-40">
-                                            <img src="assets/images/product/product-3.jpg" alt="" class="object-cover w-full h-full inset-0">
-                                        </div>
-                                        <div class="absolute right-0 top-0 m-2 bg-white/60 rounded-full py-0.5 px-2 text-sm font-semibold dark:bg-slate-800/60"> $18 </div>
-                                    </div>
-                                    <div class="mt-3 w-full"> Gaming mouse </div>
-                                </a>
-
-                            </li>
-                            <li class="w-1/2 pr-2 uk-active" tabindex="-1">
-
-                                <a href="#">
-                                    <div class="relative overflow-hidden rounded-lg">
-                                        <div class="relative w-full h-40">
-                                            <img src="assets/images/product/product-5.jpg" alt="" class="object-cover w-full h-full inset-0">
-                                        </div>
-                                        <div class="absolute right-0 top-0 m-2 bg-white/60 rounded-full py-0.5 px-2 text-sm font-semibold dark:bg-slate-800/60"> $12 </div>
-                                    </div>
-                                    <div class="mt-3 w-full"> Herbal Shampoo </div>
-                                </a>
-
-                            </li>
-
-                        </ul>
-
-                        <button type="button" class="absolute bg-white rounded-full top-16 -left-4 grid w-9 h-9 place-items-center shadow dark:bg-dark3" uk-slider-item="previous">
-                            <ion-icon name="chevron-back" class="text-2xl md hydrated" role="img" aria-label="chevron back"></ion-icon>
-                        </button>
-                        <button type="button" class="absolute -right-4 bg-white rounded-full top-16 grid w-9 h-9 place-items-center shadow dark:bg-dark3 uk-invisible" uk-slider-item="next">
-                            <ion-icon name="chevron-forward" class="text-2xl md hydrated" role="img" aria-label="chevron forward"></ion-icon>
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-            <!-- online friends -->
-            <div class="box p-5 px-6 border1 dark:bg-dark2">
-
-                <div class="flex justify-between text-black dark:text-white">
-                    <h3 class="font-bold text-base"> Online Friends </h3>
-                    <button type="button">
-                        <ion-icon name="sync-outline" class="text-xl md hydrated" role="img" aria-label="sync outline"></ion-icon>
-                    </button>
-                </div>
-
-                <div class="grid grid-cols-6 gap-3 mt-4">
-
-                    <a href="timeline.html">
-                        <div class="w-10 h-10 relative">
-                            <img src="assets/images/avatars/avatar-2.jpg" alt="" class="w-full h-full absolute inset-0 rounded-full">
-                            <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
-                        </div>
-                    </a>
-                    <a href="timeline.html">
-                        <div class="w-10 h-10 relative">
-                            <img src="assets/images/avatars/avatar-3.jpg" alt="" class="w-full h-full absolute inset-0 rounded-full">
-                            <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
-                        </div>
-                    </a>
-                    <a href="timeline.html">
-                        <div class="w-10 h-10 relative">
-                            <img src="assets/images/avatars/avatar-4.jpg" alt="" class="w-full h-full absolute inset-0 rounded-full">
-                            <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
-                        </div>
-                    </a>
-                    <a href="timeline.html">
-                        <div class="w-10 h-10 relative">
-                            <img src="assets/images/avatars/avatar-5.jpg" alt="" class="w-full h-full absolute inset-0 rounded-full">
-                            <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
-                        </div>
-                    </a>
-                    <a href="timeline.html">
-                        <div class="w-10 h-10 relative">
-                            <img src="assets/images/avatars/avatar-6.jpg" alt="" class="w-full h-full absolute inset-0 rounded-full">
-                            <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
-                        </div>
-                    </a>
-                    <a href="timeline.html">
-                        <div class="w-10 h-10 relative">
-                            <img src="assets/images/avatars/avatar-7.jpg" alt="" class="w-full h-full absolute inset-0 rounded-full">
-                            <div class="absolute bottom-0 right-0 m-0.5 bg-green-500 rounded-full w-2 h-2"></div>
-                        </div>
-                    </a>
-
-                </div>
-
-
-            </div>
-
-            <!-- Pro Members -->
-            <div class="box p-5 px-6 border1 dark:bg-dark2">
-
-                <div class="flex justify-between text-black dark:text-white">
-                    <h3 class="font-bold text-base"> Pro Members </h3>
-                </div>
-
-                <div class="relative capitalize font-normal text-sm mt-4 mb-2 uk-slider" tabindex="-1" uk-slider="autoplay: true;finite: true">
-
-                    <div class="overflow-hidden uk-slider-container">
-
-                        <ul class="-ml-2 uk-slider-items w-[calc(100%+0.5rem)]" style="transform: translate3d(-147.5px, 0px, 0px);">
-
-                            <li class="w-1/2 pr-2" tabindex="-1">
-                                <a href="timeline.html">
-                                </a>
-                                <div class="flex flex-col items-center shadow-sm p-2 rounded-xl border1"><a href="timeline.html">
-                                    </a><a href="timeline.html">
-                                        <div class="relative w-16 h-16 mx-auto mt-2">
-                                            <img src="assets/images/avatars/avatar-5.jpg" alt="" class="h-full object-cover rounded-full shadow w-full">
-                                        </div>
-                                    </a>
-                                    <div class="mt-5 text-center w-full">
-                                        <a href="timeline.html">
-                                            <h5 class="font-semibold"> Martin Gray</h5>
-                                        </a>
-                                        <div class="text-xs text-gray-400 mt-0.5 font-medium"> 12K Followers</div>
-                                        <button type="button" class="bg-secondery block font-semibold mt-4 py-1.5 rounded-lg text-sm w-full border1"> Follow </button>
-                                    </div>
-                                </div>
-
-                            </li>
-                            <li class="w-1/2 pr-2 uk-active" tabindex="-1">
-                                <div class="flex flex-col items-center shadow-sm p-2 rounded-xl border1">
-                                    <a href="timeline.html">
-                                        <div class="relative w-16 h-16 mx-auto mt-2">
-                                            <img src="assets/images/avatars/avatar-4.jpg" alt="" class="h-full object-cover rounded-full shadow w-full">
-                                        </div>
-                                    </a>
-                                    <div class="mt-5 text-center w-full">
-                                        <a href="timeline.html">
-                                            <h5 class="font-semibold"> Alexa Park</h5>
-                                        </a>
-                                        <div class="text-xs text-gray-400 mt-0.5 font-medium"> 12K Followers</div>
-                                        <button type="button" class="bg-secondery block font-semibold mt-4 py-1.5 rounded-lg text-sm w-full border1"> Follow </button>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="w-1/2 pr-2 uk-active" tabindex="-1">
-                                <div class="flex flex-col items-center shadow-sm p-2 rounded-xl border1">
-                                    <a href="timeline.html">
-                                        <div class="relative w-16 h-16 mx-auto mt-2">
-                                            <img src="assets/images/avatars/avatar-4.jpg" alt="" class="h-full object-cover rounded-full shadow w-full">
-                                        </div>
-                                    </a>
-                                    <div class="mt-5 text-center w-full">
-                                        <a href="timeline.html">
-                                            <h5 class="font-semibold"> James Lewis</h5>
-                                        </a>
-                                        <div class="text-xs text-gray-400 mt-0.5 font-medium"> 15K Followers</div>
-                                        <button type="button" class="bg-secondery block font-semibold mt-4 py-1.5 rounded-lg text-sm w-full border1"> Follow </button>
-                                    </div>
-                                </div>
-                            </li>
-
-
-                        </ul>
-
-                        <button type="button" class="absolute -translate-y-1/2 bg-slate-100 rounded-full top-1/2 -left-4 grid w-9 h-9 place-items-center dark:bg-dark3" uk-slider-item="previous">
-                            <ion-icon name="chevron-back" class="text-2xl md hydrated" role="img" aria-label="chevron back"></ion-icon>
-                        </button>
-                        <button type="button" class="absolute -right-4 -translate-y-1/2 bg-slate-100 rounded-full top-1/2 grid w-9 h-9 place-items-center dark:bg-dark3 uk-invisible" uk-slider-item="next">
-                            <ion-icon name="chevron-forward" class="text-2xl md hydrated" role="img" aria-label="chevron forward"></ion-icon>
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-            <!-- Trends -->
-            <div class="box p-5 px-6 border1 dark:bg-dark2">
-
-                <div class="flex justify-between text-black dark:text-white">
-                    <h3 class="font-bold text-base"> Trends for you </h3>
-                    <button type="button">
-                        <ion-icon name="sync-outline" class="text-xl md hydrated" role="img" aria-label="sync outline"></ion-icon>
-                    </button>
-                </div>
-
-                <div class="space-y-3.5 capitalize text-xs font-normal mt-5 mb-2 text-gray-600 dark:text-white/80">
-                    <a href="#">
-                        <div class="flex items-center gap-3 p">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 -mt-2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"></path>
-                            </svg>
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-black dark:text-white text-sm"> artificial intelligence </h4>
-                                <div class="mt-0.5"> 1,245,62 post </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="block">
-                        <div class="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 -mt-2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"></path>
-                            </svg>
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-black dark:text-white text-sm"> Web developers</h4>
-                                <div class="mt-0.5"> 1,624 post </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="block">
-                        <div class="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 -mt-2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"></path>
-                            </svg>
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-black dark:text-white text-sm"> Ui Designers</h4>
-                                <div class="mt-0.5"> 820 post </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="block">
-                        <div class="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 -mt-2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5"></path>
-                            </svg>
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-black dark:text-white text-sm"> affiliate marketing </h4>
-                                <div class="mt-0.5"> 480 post </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-
-            </div>
-
-        </div>
-        <div class="uk-sticky-placeholder" style="height: 1430px; width: 337px; margin: 0px;"></div>
-    </div>
 
 </div>
+
 
 
 <style>
@@ -2612,36 +2590,37 @@
 
         <div class="space-y-5 mt-7">
 
-            <div>
-                <label for="" class="text-base">What do you have in mind? </label>
-                <input type="text" class="w-full mt-3">
-            </div>
+            <form method="POST" action="{{ route('smme.yowza-community-stories.store', ['prefix' => 'admin']) }}" enctype="multipart/form-data">
+                @csrf
 
-            <div>
-                <div class="w-full h-72 relative border1 rounded-lg overflow-hidden bg-[url('../images/ad_pattern.png')] bg-repeat">
-
-                    <label for="createStatusUrl" class="flex flex-col justify-center items-center absolute -translate-x-1/2 left-1/2 bottom-0 z-10 w-full pb-6 pt-10 cursor-pointer bg-gradient-to-t from-gray-700/60">
-                        <input id="createStatusUrl" type="file" class="hidden">
-                        <ion-icon name="image" class="text-3xl text-teal-600 md hydrated" role="img" aria-label="image"></ion-icon>
-                        <span class="text-white mt-2">Browse to Upload image </span>
-                    </label>
-
-                    <img id="createStatusImage" src="#" alt="Uploaded Image" accept="image/png, image/jpeg" style="display:none;" class="w-full h-full absolute object-cover">
-
+                <div>
+                    <label for="caption" class="text-base">What do you have in mind?</label>
+                    <input type="text" id="caption" name="caption" class="w-full mt-3">
                 </div>
 
-            </div>
-
-            <div class="flex justify-between items-center">
-
-                <div class="flex items-start gap-2">
-                    <ion-icon name="time-outline" class="text-3xl text-sky-600 rounded-full bg-blue-50 dark:bg-transparent md hydrated" role="img" aria-label="time outline"></ion-icon>
-                    <p class="text-sm text-gray-500 font-medium"> Your Status will be available <br> for <span class="text-gray-800"> 24 Hours</span> </p>
+                <div>
+                    <div class="w-full h-72 relative border-1 rounded-lg overflow-hidden bg-[url('../images/ad_pattern.png')] bg-repeat">
+                        <label for="image" class="flex flex-col justify-center items-center absolute -translate-x-1/2 left-1/2 bottom-0 z-10 w-full pb-6 pt-10 cursor-pointer bg-gradient-to-t from-gray-700/60">
+                            <input id="image" name="image" type="file" class="hidden">
+                            <ion-icon name="image" class="text-3xl text-teal-600 md hydrated" role="img" aria-label="image"></ion-icon>
+                            <span class="text-white mt-2">Browse to Upload image</span>
+                        </label>
+                        <img id="createStatusImage" src="#" alt="Uploaded Image" accept="image/png, image/jpeg" style="display:none;" class="w-full h-full absolute object-cover">
+                    </div>
                 </div>
 
-                <button type="button" class="button bg-blue-500 text-white px-8"> Create</button>
+                <br>
 
-            </div>
+                <div class="flex justify-between items-center">
+                    <div class="flex items-start gap-2">
+                        <ion-icon name="time-outline" class="text-3xl text-sky-600 rounded-full bg-blue-50 dark:bg-transparent md hydrated" role="img" aria-label="time outline"></ion-icon>
+                        <p class="text-sm text-gray-500 font-medium"> Your Status will be available for <span class="text-gray-800">24 Hours</span> </p>
+                    </div>
+
+                    <button type="submit" class="button bg-blue-500 text-white px-8">Create</button>
+                </div>
+
+            </form>
 
         </div>
 

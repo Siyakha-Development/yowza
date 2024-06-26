@@ -8,6 +8,7 @@ use App\Models\Community\CommunityGroup;
 use App\Models\Community\CommunityGroupPost;
 use App\Models\Community\CommunityLike;
 use App\Models\Community\CommunityPost;
+use App\Models\Community\CommunityStories;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -157,7 +158,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function communityGroups()
     {
         return $this->belongsToMany(CommunityGroup::class, 'community_group_members', 'user_id', 'community_group_id')
-                    ->withTimestamps();
+            ->withTimestamps();
     }
 
     /**
@@ -166,5 +167,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function groupPosts()
     {
         return $this->hasMany(CommunityGroupPost::class);
+    }
+
+    public function communityStories()
+    {
+        return $this->hasMany(CommunityStories::class);
     }
 }

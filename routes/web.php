@@ -6,6 +6,7 @@ use App\Http\Controllers\Community\CommunityCommentController;
 use App\Http\Controllers\Community\CommunityGroupController;
 use App\Http\Controllers\Community\CommunityGroupPostController;
 use App\Http\Controllers\Community\CommunityLikeController;
+use App\Http\Controllers\Community\CommunityStoryController;
 use App\Http\Controllers\SMME\BusinessToolsController;
 use App\Http\Controllers\SMME\SMMEWorkController;
 use Illuminate\Support\Facades\Route;
@@ -207,6 +208,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         //Route::post('/community-groups/{group}/posts', [CommunityGroupPostController::class, 'store'])->name('community-posts.store');
 
         Route::resource('smme-business-tools', BusinessToolsController::class);
+        Route::resource('yowza-community-stories', CommunityStoryController::class);
 
 
 

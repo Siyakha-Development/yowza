@@ -24,7 +24,7 @@
             <div class="flex items-center space-x-4">
                 <div class="avatar size-14">
                     @if ($profileImage)
-                    <img class="mask is-squircle" src="{{ Storage::url($profileImage->profile_picture) }}" alt="avatar">
+                    <img class="mask is-squircle" src="{{ asset('profile_pictures/' . $user->profileImage->profile_picture) }}" alt="avatar">
                     @else
                     <img class="rounded-full" src="{{ asset('backend/images/avatar/black-afro.png') }}" alt="avatar" />
                     @endif
@@ -44,7 +44,7 @@
                                     <div class="relative max-w-md rounded-lg bg-white pt-10 pb-4 text-center transition-all duration-300 dark:bg-navy-700" x-show="showModal" x-transition:enter="easy-out" x-transition:enter-start="opacity-0 [transform:translate3d(0,1rem,0)]" x-transition:enter-end="opacity-100 [transform:translate3d(0,0,0)]" x-transition:leave="easy-in" x-transition:leave-start="opacity-100 [transform:translate3d(0,0,0)]" x-transition:leave-end="opacity-0 [transform:translate3d(0,1rem,0)]">
                                         <div class="avatar size-20">
                                             @if ($profileImage)
-                                            <img src="{{ Storage::url($profileImage->profile_picture) }}" alt="Profile Image">
+                                            <img src="{{ asset('profile_pictures/' . $user->profileImage->profile_picture) }}" alt="Profile Image">
                                             @else
                                             <img class="rounded-full" src="{{ asset('backend/images/avatar/black-afro.png') }}" alt="avatar" />
                                             @endif
@@ -65,7 +65,7 @@
                                                 Cancel
                                             </button>
                                             <button type="submit" class="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                                                Apply
+                                                Save
                                             </button>
                                         </div>
                                     </div>
