@@ -209,12 +209,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::resource('smme-business-tools', BusinessToolsController::class);
         Route::resource('yowza-community-stories', CommunityStoryController::class);
+        Route::get('yowza-community-stories/{user}', [CommunityStoryController::class, 'userStories'])->name('stories.user');
 
-
+        Route::get('/test-stories/{user}', function ($userId) {
+            $stories = \App\Models\Community\CommunityStories::where('user_id', $userId)->latest()->get();
+            dd($stories);
+        });
 
     });
 });
 
+Route::get('yowza-community-stories/user/{userId}/latest-story', [CommunityStoryController::class, 'userLatestStory'])->name('stories.user.latest');
+Route::get('/test-stories/{user}', function ($userId) {
+    $stories = \App\Models\Community\CommunityStories::where('user_id', $userId)->latest()->get();
+    dd($stories);
+});
 //Contact Form url:
 Route::get('/contact-form', [ContactFormController::class, 'showContactForm'])->name('contact-form');
 Route::post('/contact-form', [ContactFormController::class, 'submit'])->name('contact-form.submit');

@@ -48,6 +48,13 @@ class CommunityStoryController extends Controller
         return redirect()->back()->with('message', 'Story uploaded successfully.');
     }
 
+    public function userStories($prefix, $userId)
+    {
+        $stories = CommunityStories::where('user_id', $userId)->latest()->get();
+        return response()->json($stories);
+    }
+
+
     /**
      * Display the specified resource.
      */

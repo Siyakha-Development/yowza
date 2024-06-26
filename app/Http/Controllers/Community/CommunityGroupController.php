@@ -162,7 +162,7 @@ class CommunityGroupController extends Controller
         // Check if user is already a member
         if (!$group->members->contains(Auth::id())) {
             $group->members()->syncWithoutDetaching([Auth::id()]);
-            return redirect()->route('community.group', ['prefix' => 'admin'])->with('success', 'You have successfully joined the group.');
+            return redirect()->back()->with('success', 'You have successfully joined the group.');
         }
 
         return redirect()->back()->with('message', 'You are already a member of this group.');
