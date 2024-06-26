@@ -167,10 +167,14 @@
 
             <!-- post heading -->
             <div class="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
-                <a href="timeline.html"> <img src="{{ $profileImage ? asset('profile_pictures/' . $profileImage) : asset('backend/images/avatar/black-afro.png') }}" alt="" class="w-9 h-9 rounded-full"> </a>
+                @if($post->user && $post->user->profileImage)
+                <a href=""> <img src="{{ asset('profile_pictures/' . $post->user->profileImage->profile_picture) }}" alt="" class="w-9 h-9 rounded-full"> </a>
+                @else
+                <a href=""> <img src="{{ asset('backend/images/avatar/black-afro.png') }}" alt="" class="w-9 h-9 rounded-full"> </a>
+                @endif
                 <div class="flex-1">
-                    <a href="timeline.html">
-                        <h4 class="text-black dark:text-white"> {{ $post->user->name }} </h4>
+                    <a href="">
+                        <h4 class="text-black dark:text-white"> {{ $post->user ? $post->user->name : 'No User' }} </h4>
                     </a>
                     <div class="text-xs text-gray-500 dark:text-white/80"> {{ $post->created_at->format('M d, Y') }}</div>
                 </div>
@@ -264,7 +268,13 @@
                 @if($post->comments->isNotEmpty())
                 @foreach($post->comments as $comment)
                 <div class="flex items-start gap-3 relative">
-                    <a href=""> <img src="{{ $profileImage ? asset('profile_pictures/' . $profileImage) : asset('backend/images/avatar/black-afro.png') }}" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
+                    @if($comment->user && $comment->user->profileImage)
+                    <a href=""> <img src="{{ asset('profile_pictures/' . $comment->user->profileImage->profile_picture) }}" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
+                    @else
+                    <a href=""> <img src="{{ asset('backend/images/avatar/black-afro.png') }}" alt="" class="w-6 h-6 mt-1 rounded-full"> </a>
+
+                    @endif
+
                     <div class="flex-1">
                         <a href="" class="text-black font-medium inline-block dark:text-white"> {{ $comment->user->name }} </a>
                         <p class="mt-0.5">{{ $comment->content }}</p>
@@ -296,11 +306,10 @@
             <form action="{{ route('smme.community-comments.store', ['prefix' => 'admin', 'postId' => $post->id]) }}" method="POST">
                 @csrf
                 <div class="sm:px-4 sm:py-3 p-2.5 border-t border-gray-100 flex items-center gap-1 dark:border-slate-700/40">
-                    @if($post->user->profileImage)
-                    <img src="{{ asset('profile_pictures/' . $post->user->profileImage->profile_picture) }}" alt="" class="w-6 h-6 rounded-full">
-                    @else
-                    <img src="{{ asset('backend/images/avatar/black-afro.png') }}" alt="" class="w-6 h-6 rounded-full">
-                    @endif
+                    
+                    <img src="{{ $profileImage ? asset('profile_pictures/' . $profileImage) : asset('backend/images/avatar/black-afro.png') }}" alt="" class="w-6 h-6 rounded-full">
+                 
+                
                     <div class="flex-1 relative overflow-hidden h-10">
 
                         <input class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" type="text" name="content" placeholder="Add a comment..." value="{{ old('content') }}">
@@ -338,11 +347,12 @@
             </form>
 
         </div>
+        <br>
+        <br>
         @endforeach
         @endif
 
-        <br>
-        <br>
+      
     </div>
     <div class="col-span-12 py-6 lg:sticky lg:bottom-0 lg:col-span-4 lg:self-end">
         <div class="card">
