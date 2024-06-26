@@ -66,7 +66,8 @@ class CommunityPostController extends Controller
         $user = Auth::user();
         $this->pointService->awardPoints($user, 5, 'Created Post');
 
-        return response()->json(['message' => 'Post created successfully', 'post' => $post], 201);
+        // return response()->json(['message' => 'Post created successfully', 'post' => $post], 201);
+        return redirect()->back()->with('message', 'Post created successfully');
     }
 
 
