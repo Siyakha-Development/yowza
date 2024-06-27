@@ -43,6 +43,6 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.3
         with:
-          server: ftp.yowza.co.za
-          username: dev@yowza.co.za
-          password: Cx$5.vOSjyB0
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
