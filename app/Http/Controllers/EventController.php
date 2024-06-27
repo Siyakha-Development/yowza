@@ -102,7 +102,7 @@ class EventController extends Controller
             );
         }
 
-        return redirect('admin/admin/events')->with($notification);
+        return redirect()->route('events.index')->with($notification);
     }
 
     /**

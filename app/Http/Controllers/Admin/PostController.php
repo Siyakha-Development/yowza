@@ -108,7 +108,7 @@ class PostController extends Controller
             'message' => 'blog post created successfully',
             'alert-type' => 'success'
         );
-        return redirect()->route('admin.post.all_blog_post', ['prefix' => 'admin'])->with($notification);
+        return redirect()->route('post.all')->with($notification);
     }
 
     public function show($prefix, $id)
@@ -229,7 +229,7 @@ class PostController extends Controller
             'alert-type' => 'warning'
         );
 
-        return redirect('/admin/admin/post')->with($notification);
+        return redirect()->route('post.all')->with($notification);
     }
 
     //Search

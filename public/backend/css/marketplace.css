@@ -1,0 +1,17 @@
+/* Add this to your CSS file */
+.card {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card.dark {
+    background-color: #000000;
+}
+.card.dark {
+    color: #fff;
+}
+

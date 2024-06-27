@@ -20,6 +20,7 @@ return new class extends Migration
             $table->json('preferences'); // Assuming preferences is a JSON field
             $table->boolean('boost_listing')->default(false);
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -1,3 +1,8 @@
+
+@php
+    $user = auth()->user();
+    $unreadNotificationsCount = $user->unreadNotifications->count();
+    @endphp
 <nav class="header before:bg-white dark:before:bg-navy-750 print:hidden">
     <!-- App Header  -->
     <div
@@ -721,7 +726,7 @@
                                         <div
                                             class="badge h-5 rounded-full bg-primary/10 px-1.5 text-primary dark:bg-accent-light/15 dark:text-accent-light"
                                         >
-                                            26
+                                           {{    $unreadNotificationsCount}}
                                         </div>
                                     </div>
 

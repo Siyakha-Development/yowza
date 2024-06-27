@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Community\CommunityCommentController;
 use App\Http\Controllers\Community\CommunityGroupController;
 use App\Http\Controllers\Community\CommunityLikeController;
+use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SMME\SMMEWorkController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
@@ -35,6 +37,8 @@ use App\Http\Controllers\UserProfileImageController;
 use App\Http\Controllers\Admin\ProgressController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\ListingRatingController;
+
 
 
 
@@ -231,16 +235,18 @@ Route::middleware(['auth'])->prefix('marketplace')->group(function () {
 
     //Route for Marketplace listing
     Route::controller(ListingController::class)->group(function () {
-        Route::get('/listings/create', [ListingController::class, 'create'])->name('marketplace.listings.create');
+        Route::get('/listings/create-item', [ListingController::class, 'create'])->name('marketplace.listings.create');
         Route::post('/listings', [ListingController::class, 'store'])->name('marketplace.listings.store');
         Route::get('listings/{listing}/edit', [ListingController::class, 'edit'])->name('marketplace.listings.edit');
-        Route::put('listings/{listing}', [ListingController::class, 'update'])->name('marketplace.listings.update');
+        Route::put('listings/{id}', [ListingController::class, 'update'])->name('marketplace.listings.update');
+        Route::post('/rate/{listing}', [ListingRatingController::class, 'store'])->name('marketplace.rate.store');
     });
 
 
 });
 
 Route::get('marketplace_categories', [MarketplaceCategoryController::class, 'index'])->name('marketplace.index');
+Route::get('listings/create_list', [ListingController::class, 'create_List'])->name('marketplace.listings.create_list');
 //Route::get('faq', function () {
 //    return view('helpdesk.faq');
 //})->name('faq');
@@ -266,3 +272,10 @@ Route::get('lesson-course', function () {
 Route::get('/test-sentry', function () {
     throw new Exception('Testing Sentry...');
 });
+
+Route::post('/listings/{listing}/inquiries', [InquiryController::class, 'store'])->name('inquiries.store');
+
+//Notifications
+// routes/web.php
+Route::post('/notifications/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+Route::get('/notifications/{notification}', [NotificationController::class, 'show'])->name('notifications.show');

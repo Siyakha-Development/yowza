@@ -48,7 +48,7 @@ class SMMEWorkController extends Controller
                 ->orderBy('id', 'desc')
                 ->get();
         }
-        
+
         $courses = Course::paginate(10);
         $financialData = FinancialData::where('user_id', $user->id)
             ->with('workspace')

@@ -14,4 +14,16 @@ class Listing extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function updateAverageRating()
+    {
+        $averageRating = $this->ratings()->avg('rating');
+        $this->average_rating = $averageRating;
+        $this->save();
+    }
 }

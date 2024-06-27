@@ -10,7 +10,7 @@ import 'tinymce/models/dom/model';
 // .. After imports init TinyMCE ..
 window.addEventListener('DOMContentLoaded', () => {
     tinymce.init({
-        selector: 'textarea',
+        selector: 'textarea:not(.tinymce-exclude)',
 
         /* TinyMCE configuration options */
         skin: false,

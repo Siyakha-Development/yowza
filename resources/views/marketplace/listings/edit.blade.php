@@ -43,45 +43,65 @@
                             <i class="fa-solid fa-layer-group"></i>
                         </div>
                         <h4 class="text-lg font-medium text-slate-700 dark:text-navy-100">
-                            Create Item for Sale
+                            Update Item for Sale
                         </h4>
                     </div>
                 </div>
-                <form action="{{route('marketplace.listings.edit',$listing->id)}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('marketplace.listings.update', $listing->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
+                    @method('PUT') <!-- Add this line to specify the HTTP method as PUT -->
                     <div class="space-y-4 p-4 sm:p-5">
-                        <label class="block">
-                            <span>Product name</span>
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <label class="block">
+                                <span>Product name</span>
 
-                            <input
-                                class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                placeholder="Enter product name"
-                                type="text"
-                                name="title"
-                            />
-                        </label>
-                        <label class="block">
-                            <span>Product Description</span>
+                                <input
+                                    class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                    placeholder="Enter product name"
+                                    type="text"
+                                    name="title"
+                                    value="{{old('title',$listing->title)}}"
+                                />
+                            </label>
+                            <label class="block">
+                                <span>Product Description</span>
 
-                            <input
-                                class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                placeholder="Enter product name"
-                                type="text"
-                                name="description"
-                            />
-                        </label>
-                        <label class="block">
-                            <span>Availability</span>
-                            <select
-                                class="mt-1.5 w-full"
-                                x-init="$el._x_tom = new Tom($el,{create: true,sortField: {field: 'text',direction: 'asc'}})"
-                                name="availability"
-                            >
-                                <option value="list as single item">list as single item</option>
-                                <option value="list as in stock">list as in stock</option>
-                            </select>
-                        </label>
+                                <input
+                                    class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                    placeholder="Enter product name"
+                                    type="text"
+                                    name="description"
+                                    value="{{ old('description', $listing->description) }}"
+
+                                />
+                            </label>
+                            <label class="block">
+                                <span>Availability</span>
+                                <select
+                                    class="mt-1.5 w-full"
+                                    x-init="$el._x_tom = new Tom($el,{create: true,sortField: {field: 'text',direction: 'asc'}})"
+                                    name="availability"
+                                >
+                                    <option value="list as single item" {{ old('availability', $listing->availability) == 'list as single item' ? 'selected' : '' }}>list as single item</option>
+                                    <option value="list as in stock" {{ old('availability', $listing->availability) == 'list as in stock' ? 'selected' : '' }}>list as in stock</option>
+                                </select>
+                            </label>
+                            <label class="block">
+                                <span>Condition</span>
+                                <select
+                                    class="mt-1.5 w-full"
+                                    x-init="$el._x_tom = new Tom($el,{create: true,sortField: {field: 'text',direction: 'asc'}})"
+                                    name="condition"
+
+                                >
+                                    <option value="new" {{ old('condition', $listing->condition) == 'new' ? 'selected' : '' }}>new</option>
+                                    <option value="used - like new" {{ old('condition', $listing->condition) == 'used - like new' ? 'selected' : '' }}>used - like new</option>
+                                    <option value="used - good" {{ old('condition', $listing->condition) == 'used - good' ? 'selected' : '' }}>used - good</option>
+                                    <option value="used - fair" {{ old('condition', $listing->condition) == 'used - fair' ? 'selected' : '' }}>used - fair</option>
+                                </select>
+                            </label>
+                        </div>
+
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <label class="block">
                                 <span>Category</span>
@@ -89,38 +109,29 @@
                                     class="mt-1.5 w-full"
                                     x-init="$el._x_tom = new Tom($el,{create: true,sortField: {field: 'text',direction: 'asc'}})"
                                     name="category"
+                                    value="{{old('category')}}"
                                 >
-                                    <option value="Digital">Digital</option>
-                                    <option value="Technology">Technology</option>
-                                    <option value="Home">Home</option>
-                                    <option value="Other">Other</option>
+                                    <option value="Digital" {{ old('category', $listing->category) == 'Digital' ? 'selected' : '' }}>Digital</option>
+                                    <option value="Technology" {{ old('category', $listing->category) == 'Technology' ? 'selected' : '' }}>Technology</option>
+                                    <option value="Home" {{ old('category', $listing->category) == 'Home' ? 'selected' : '' }}>Home</option>
+                                    <option value="mobile phone" {{ old('category', $listing->category) == 'mobile phone' ? 'selected' : '' }}>mobile phone</option>
+                                    <option value="computers/laptop" {{ old('category', $listing->category) == 'computers/laptop' ? 'selected' : '' }}>computers/laptop</option>
+                                    <option value="health" {{ old('category', $listing->category) == 'health' ? 'selected' : '' }}>health</option>
                                 </select>
                             </label>
-
-                            <div class="grid grid-cols-2 gap-4">
-                                <label class="block">
-                                    <span>SKU</span>
-                                    <input
-                                        class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                        placeholder="SKU"
-                                        type="text"
-                                        name="sku"
-                                    />
-                                </label>
-
-                                <label class="block">
-                                    <span>Price</span>
-                                    <input
-                                        class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                                        placeholder="Price"
-                                        type="text"
-                                        name="price"
-                                    />
-                                </label>
-                            </div>
+                            <label class="block">
+                                <span>SKU</span>
+                                <input
+                                    class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                    placeholder="SKU"
+                                    type="text"
+                                    name="sku"
+                                    value="{{ old('sku', $listing->sku) }}"
+                                />
+                            </label>
                         </div>
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            <label class="inline-block">
+                            <label class="block">
                                 <span>Product Tags</span>
                                 <input
                                     class="mt-1.5 w-full"
@@ -128,43 +139,31 @@
                                     placeholder="Enter tags"
                                     type="text"
                                     name="tags"
+                                    value="{{ old('tags', $listing->tags) }}"
                                 />
                             </label>
-                            <div class="grid grid-cols-2 gap-4">
-                                <label class="inline-block">
-                                    <span class="mb-5">Boost listings after publishing</span>
-                                    <br/> <br/>
-                                    <input
-                                        class="form-switch is-outline h-5 w-10 rounded-full border border-slate-400/70 bg-slate-100 before:rounded-full before:bg-slate-300 checked:border-primary checked:before:bg-primary dark:border-navy-500 dark:bg-navy-900 dark:before:bg-navy-400 dark:checked:border-accent dark:checked:before:bg-accent"
-                                        type="checkbox"
-                                        name="boost_listing"
-                                    />
-                                </label>
-                            </div>
+                            <label class="block">
+                                <span>Price</span>
+                                <input
+                                    class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                    placeholder="Price"
+                                    type="text"
+                                    name="price"
+                                    value="{{ old('price', $listing->price) }}"
+                                />
+                            </label>
 
-                        </div>
-                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                            <label class="inline-flex items-center space-x-2">
+                            <label class="block">
+                                <span>Location</span>
                                 <input
-                                    class="form-checkbox is-basic size-5 rounded bg-slate-100 border-slate-400/70 checked:bg-primary checked:border-primary hover:border-primary focus:border-primary dark:bg-navy-900 dark:border-navy-500 dark:checked:bg-accent dark:checked:border-accent dark:hover:border-accent dark:focus:border-accent"
-                                    type="checkbox"  name="preferences[]" value="Public meetup"
+                                    class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                                    placeholder="Location"
+                                    type="text"
+                                    name="location"
+                                    value="{{old('location',$listing->location)}}"
                                 />
-                                <span>Public meetup</span>
                             </label>
-                            <label class="inline-flex items-center space-x-2">
-                                <input
-                                    class="form-checkbox is-basic size-5 rounded bg-slate-100 border-slate-4Door Pick up00/70 checked:bg-primary checked:border-primary hover:border-primary focus:border-primary dark:bg-navy-900 dark:border-navy-500 dark:checked:bg-accent dark:checked:border-accent dark:hover:border-accent dark:focus:border-accent"
-                                    type="checkbox" name="preferences[]" value="Door Pick up"
-                                />
-                                <span>Door Pick up</span>
-                            </label>
-                            <label class="inline-flex items-center space-x-2">
-                                <input
-                                    class="form-checkbox is-basic size-5 rounded bg-slate-100 border-slate-400/70 checked:bg-primary checked:border-primary hover:border-primary focus:border-primary dark:bg-navy-900 dark:border-navy-500 dark:checked:bg-accent dark:checked:border-accent dark:hover:border-accent dark:focus:border-accent"
-                                    type="checkbox" name="preferences[]" value="Door drop off"
-                                />
-                                <p>Door drop off</p>
-                            </label>
+
 
                         </div>
                         <div>
@@ -185,7 +184,7 @@
                         </div>
                         <div class="flex justify-center space-x-2 pt-4">
                             <button class="btn space-x-2 bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
-                                <span>Create</span>
+                                <span>Update Listing</span>
                             </button>
                         </div>
                     </div>
