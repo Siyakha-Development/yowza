@@ -40,8 +40,8 @@ jobs:
       - name: Compile Css and Js Assets
         run: npm run build
 
-      - name: 📂 Sync files successfully
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USER }}
