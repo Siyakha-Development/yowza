@@ -171,6 +171,7 @@ return [
         App\Providers\ViewComposerServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         Sentry\Laravel\ServiceProvider::class,
+        App\Providers\ViewServiceProvider::class,
     ])->toArray(),
 
     /*

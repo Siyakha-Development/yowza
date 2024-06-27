@@ -29,7 +29,7 @@
                     @method('put')
                     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                         <label for="course_id">Course*</label>
-                        <select name="course_id" class="form-control" id="teacher" >
+                        <select name="course_id" class="form-select mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent" id="teacher" >
                             @foreach($courses as $id => $courseName)
                                 <option {{ $id == $lesson->course_id ? "selected" : null }} value="{{ $id }}">{{ $courseName }}</option>
                             @endforeach
@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                         <label for="title">title*</label>
-                        <input type="text" id="title" name="title" class="form-control" value="{{ old('title', isset($lesson) ? $lesson->title : '') }}" required>
+                        <input type="text" id="title" name="title" class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" value="{{ old('title', isset($lesson) ? $lesson->title : '') }}" required>
                         @if($errors->has('title'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('title') }}
@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
                         <label for="slug">Slug*</label>
-                        <input type="text" id="slug" name="slug" class="form-control" value="{{ old('slug', isset($lesson) ? $lesson->slug : '') }}" required>
+                        <input type="text" id="slug" name="slug" class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" value="{{ old('slug', isset($lesson) ? $lesson->slug : '') }}" required>
                         @if($errors->has('slug'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('slug') }}
@@ -82,7 +82,7 @@
                     </div>
                     <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
                         <label for="embed_id">Youtube URL*</label>
-                        <input type="text" id="embed_id" name="embed_id" class="form-control" value="{{ old('embed_id', isset($lesson) ? $lesson->embed_id : '') }}" required />
+                        <input type="text" id="embed_id" name="embed_id" class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" value="{{ old('embed_id', isset($lesson) ? $lesson->embed_id : '') }}" required />
                         @if($errors->has('slug'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('slug') }}
@@ -91,7 +91,7 @@
                     </div>
                     <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
                         <label for="free_lesson">Free Lesson*</label>
-                        <select name="free_lesson" class="form-control" id="free_lesson">
+                        <select name="free_lesson" class="form-select mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent" id="free_lesson">
                             <option {{ $lesson->free_lesson == 1 ? 'selected' : null }} value="1">Yes</option>
                             <option {{ $lesson->free_lesson == 0 ? 'selected' : null }} value="0">No</option>
                         </select>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
                         <label for="published">Published*</label>
-                        <select name="published" class="form-control" id="published">
+                        <select name="published" class="form-select mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent" id="published">
                             <option {{ $lesson->published == 1 ? 'selected' : null }} value="1">Active</option>
                             <option {{ $lesson->published == 0 ? 'selected' : null }} value="0">In Active</option>
                         </select>
@@ -113,6 +113,7 @@
                             </em>
                         @endif
                     </div>
+                    <br>
                     <div class="flex justify-end space-x-2">
                         <button class="btn space-x-2 bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90z" type="submit">Update Lesson</button>
                     </div>

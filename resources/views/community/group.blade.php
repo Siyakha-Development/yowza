@@ -114,7 +114,7 @@
                     </a>
                     <div class="card-text">
                         <div class="card-list-info font-normal mt-1">
-                            <div>{{ $group->community_group_members_count }} members </div>
+                            <div>{{ $group->members_count }} members </div>
                             <div class="md:block hidden">·</div>
                             <a href="#"> Private: <b>{{ $group->is_private ? 'Yes' : 'No' }}</b> </a>
                         </div>

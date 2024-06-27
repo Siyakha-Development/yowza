@@ -127,15 +127,14 @@ $role = $roles->first();
                 <!-- Profile -->
                 <div x-data="usePopper({placement:'right-end',offset:12})" @click.outside="isShowPopper && (isShowPopper = false)" class="flex">
                     <button @click="isShowPopper = !isShowPopper" x-ref="popperRef" class="avatar size-12">
-                        <img class="rounded-full" src="{{asset('backend/images/yowza-logo-mark-1.png')}}" alt="avatar" />
-                        <span class="absolute right-0 size-3.5 rounded-full border-2 border-white bg-success dark:border-navy-700"></span>
+<img class="rounded-full" src="{{ $profileImage ? asset('profile_pictures/' . $profileImage) : asset('backend/images/avatar/black-afro.png') }}" alt="avatar" />                        <span class="absolute right-0 size-3.5 rounded-full border-2 border-white bg-success dark:border-navy-700"></span>
                     </button>
 
                     <div :class="isShowPopper && 'show'" class="popper-root fixed" x-ref="popperRoot">
                         <div class="popper-box w-64 rounded-lg border border-slate-150 bg-white shadow-soft dark:border-navy-600 dark:bg-navy-700">
                             <div class="flex items-center space-x-4 rounded-t-lg bg-slate-100 py-5 px-4 dark:bg-navy-800">
                                 <div class="avatar size-14">
-                                    <img class="rounded-full" src="{{asset('backend/images/yowza-logo-mark-1.png')}}" alt="avatar" />
+                                    <img class="rounded-full" src="{{ $profileImage ? asset('profile_pictures/' . $profileImage) : asset('backend/images/avatar/black-afro.png') }}" alt="avatar" />
                                 </div>
                                 <div>
                                     <a href="#" class="text-base font-medium text-slate-700 hover:text-primary focus:text-primary dark:text-navy-100 dark:hover:text-accent-light dark:focus:text-accent-light">
