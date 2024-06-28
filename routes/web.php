@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Community\CommunityCommentController;
 use App\Http\Controllers\Community\CommunityGroupController;
 use App\Http\Controllers\Community\CommunityLikeController;
+use App\Http\Controllers\Community\CommunityStoryController;
+use App\Http\Controllers\SMME\BusinessToolsController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SMME\SMMEWorkController;
@@ -204,13 +206,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->name('community-comments.store');
         Route::resource('yowza-community-groups', \App\Http\Controllers\Community\CommunityGroupController::class);
         Route::post('yowza-community-groups/{groupId}/join', [CommunityGroupController::class, 'join'])->name('groups.join');
+        //Route::get('/community-groups/{group}/posts/create', [CommunityGroupPostController::class, 'create'])->name('community-posts.create');
+        //Route::post('/community-groups/{group}/posts', [CommunityGroupPostController::class, 'store'])->name('community-posts.store');
 
+        Route::resource('smme-business-tools', BusinessToolsController::class);
+        Route::resource('yowza-community-stories', CommunityStoryController::class);
+        Route::get('yowza-community-stories/{user}', [CommunityStoryController::class, 'userStories'])->name('stories.user');
 
-
-
-
+        Route::get('/test-stories/{user}', function ($userId) {
+            $stories = \App\Models\Community\CommunityStories::where('user_id', $userId)->latest()->get();
+            dd($stories);
+        });
 
     });
+});
+
+Route::get('yowza-community-stories/user/{userId}/latest-story', [CommunityStoryController::class, 'userLatestStory'])->name('stories.user.latest');
+Route::get('/test-stories/{user}', function ($userId) {
+    $stories = \App\Models\Community\CommunityStories::where('user_id', $userId)->latest()->get();
+    dd($stories);
 });
 
 //Contact Form url:

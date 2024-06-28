@@ -343,17 +343,17 @@ html.dark {
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f8fafc;
+    background-color: #f8fafc !important;
     color: #000000;
-    font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;;
+    font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji !important;
     font-size: .875rem;
     line-height: 1.25rem;
     text-rendering: optimizeLegibility
 }
 
 :is(.dark body) {
-    background-color: #192132;
-    color: #a3adc2;
+    background-color: #bbb;
+    color: #fff;
     color-scheme: dark
 }
 
@@ -9158,7 +9158,7 @@ button.gridjs-sort-asc, button.gridjs-sort-desc {
 }
 
 .bg-slate-50 {
-    background-color: #f8fafc
+    background-color: #bbbbbb4a;
 }
 
 .bg-slate-500 {

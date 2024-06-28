@@ -28,6 +28,38 @@ class UserProfileImageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     $user = Auth::user();
+
+    //     // Validate the incoming request data
+    //     $validatedData = $request->validate([
+    //         'profile_picture' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
+    //     ]);
+
+    //     // Handle the file upload
+    //     if ($request->hasFile('profile_picture')) {
+    //         $file = $request->file('profile_picture');
+    //         $filename = date('YmdHi') . $file->getClientOriginalName();
+    //         $file->move(public_path('upload/profile_pictures'), $filename);
+
+    //         // Update or create profile image record
+    //         $user->profileImage()->updateOrCreate(
+    //             ['user_id' => $user->id],
+    //             ['profile_picture' => $filename]
+    //         );
+
+    //         // Prepare a notification for the user
+    //         $notification = [
+    //             'message' => 'Profile picture updated successfully',
+    //             'alert-type' => 'info'
+    //         ];
+
+    //         // Redirect back with the notification
+    //         return back()->with($notification);
+    //     }
+    // }
+
     public function store(Request $request)
     {
         $user = Auth::user();
@@ -41,7 +73,7 @@ class UserProfileImageController extends Controller
         if ($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
             $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('upload/profile_pictures'), $filename);
+            $file->move(public_path('profile_pictures'), $filename);
 
             // Update or create profile image record
             $user->profileImage()->updateOrCreate(
@@ -59,6 +91,7 @@ class UserProfileImageController extends Controller
             return back()->with($notification);
         }
     }
+
     /**
      * Display the specified resource.
      */

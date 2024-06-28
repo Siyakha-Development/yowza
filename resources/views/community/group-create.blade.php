@@ -19,14 +19,14 @@
 
         <div class="card p-4 sm:p-5">
             <p class="text-base font-medium text-slate-700 dark:text-navy-100">
-                Shipping Address
+                Create your SMME Group
             </p>
             <div class="mt-4 space-y-4">
-                <form action="{{ route('smme.yowza-community-groups.store', ['prefix' => 'admin']) }}" method="POST">
+                <form action="{{ route('smme.yowza-community-groups.store', ['prefix' => 'admin']) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="name">Group Name</label>
-                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                        <input type="text" name="name" id="name" class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
                         @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -42,15 +42,18 @@
 
                     <div class="form-group">
                         <label for="group_banner">Group Banner</label>
-                        <input type="file" name="group_banner" id="group_banner" class="form-control">
+                        <input type="file" name="group_banner" id="group_banner" class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent">
                     </div>
+                    <br>
 
                     <div class="form-group form-check">
-                        <input type="checkbox" name="is_private" id="is_private" class="form-check-input" value="1" {{ old('is_private') ? 'checked' : '' }}>
-                        <label for="is_private" class="form-check-label">Private Group</label>
+                    <label for="is_private" class="inline-flex items-center space-x-2">
+                        <input type="checkbox" name="is_private" id="is_private" class="form-check-input form-checkbox is-basic size-5 rounded border-slate-400/70 checked:bg-primary checked:border-primary hover:border-primary focus:border-primary dark:border-navy-400 dark:checked:bg-accent dark:checked:border-accent dark:hover:border-accent dark:focus:border-accent" value="1" {{ old('is_private') ? 'checked' : '' }}>
+                         <p>Private Group</p>
+                        </label>
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Create Group</button>
+                    <br>
+                    <button type="submit" class="btn bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">Create Group</button>
                 </form>
             </div>
         </div>

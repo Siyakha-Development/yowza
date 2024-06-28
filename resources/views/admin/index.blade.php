@@ -334,7 +334,7 @@
                     <h2
                         class="font-medium tracking-wide text-slate-700 dark:text-navy-100"
                     >
-                        Income
+                        Invoices
                     </h2>
 
                     <div

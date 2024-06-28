@@ -619,18 +619,18 @@ html {
 
 body {
   --tw-bg-opacity: 1;
-  background-color: rgb(var(--color-bgbody) / var(--tw-bg-opacity));
+  background-color: #f9fafb;
   font-weight: 400;
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
+  /* --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity)); */
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   body {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
-}
+} */
 
 /* Basic */
 
@@ -4531,7 +4531,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-slate-200\/40 {
-  background-color: rgb(226 232 240 / 0.4);
+  background-color: #000000e8 !important;
 }
 
 .bg-slate-200\/50 {

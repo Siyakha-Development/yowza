@@ -153,34 +153,49 @@ class CourseController extends Controller
         //
     }
 
-    public function edit(Course $course)
+    // public function edit($prefix, Course $course)
+    // {
+    //     $teachers = User::whereHas('role', function ($q) {
+    //         $q->where('role_id', 1);
+    //     })
+    //         ->get()
+    //         ->pluck('name', 'id');
+
+    //     return view('admin.courses.edit', compact('course', 'teachers'));
+    // }
+
+    public function edit($prefix, Course $course)
     {
-        $teachers = User::whereHas('role', function ($q) {
-            $q->where('role_id', 2);
-        })
-            ->get()
-            ->pluck('name', 'id');
+        $teachers = User::whereHas('roles', function ($q) {
+            $q->where('role_id', 1); // userid 2
+        })->get()->pluck('name', 'id');
 
         return view('admin.courses.edit', compact('course', 'teachers'));
     }
 
-    public function update(Request $request, Course $course)
+
+    public function update($prefix, Request $request, Course $course)
     {
         $data = $request->all();
-        if ($request->has('course_image')) {
-            Storage::disk('public')->delete($course->course_image);
 
-            $data['course_image'] = $request->file('course_image')->store(
-                'images/courses',
-                'public'
-            );
+        if ($request->hasFile('course_image')) {
+            // Delete the old image
+            if ($course->course_image) {
+                Storage::disk('public')->delete($course->course_image);
+            }
+
+            // Store the new image
+            $data['course_image'] = $request->file('course_image')->store('images/courses', 'public');
         }
 
+        // Update the course with the new data
         $course->update($data);
+
+        // Sync teachers if the user is an admin
         $teachers = auth()->user()->isAdmin() ? array_filter((array) $request->input('teachers')) : [auth()->id()];
         $course->teachers()->sync($teachers);
 
-        return redirect()->route('admin.courses.index');
+        return redirect()->route('admin.courses.index', ['prefix' => 'admin']);
     }
 
     public function destroy(Course $course)
