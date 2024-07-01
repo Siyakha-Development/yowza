@@ -40,6 +40,7 @@ use App\Http\Controllers\Admin\ProgressController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ListingRatingController;
+use App\Http\Controllers\AiChat\AiChatController;
 
 
 
@@ -261,6 +262,7 @@ Route::middleware(['auth'])->prefix('marketplace')->group(function () {
 
 Route::get('marketplace_categories', [MarketplaceCategoryController::class, 'index'])->name('marketplace.index');
 Route::get('listings/create_list', [ListingController::class, 'create_List'])->name('marketplace.listings.create_list');
+
 //Route::get('faq', function () {
 //    return view('helpdesk.faq');
 //})->name('faq');
@@ -293,3 +295,7 @@ Route::post('/listings/{listing}/inquiries', [InquiryController::class, 'store']
 // routes/web.php
 Route::post('/notifications/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
 Route::get('/notifications/{notification}', [NotificationController::class, 'show'])->name('notifications.show');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/ai-chat', [AIChatController::class, 'index'])->name('ai-chat.index');
+    Route::post('/generate-response', [AIChatController::class, 'generateResponse'])->name('ai-chat.generate-response');
+});
