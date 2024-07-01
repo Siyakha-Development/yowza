@@ -20,6 +20,8 @@ class Course extends Model
         'course_image',
         'start_date',
         'published',
+        'course_category',
+        'course_category_image',
     ];
 
     public function teachers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany

@@ -24,20 +24,20 @@
         <div class="card p-4 sm:p-5">
 
 
-            <form action="{{ url('/admin/admin/courses') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.courses.store', ['prefix' => 'admin'])}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
                     <label for="course_category"><span>Course Category</span>
                         <select name="course_category" class="form-control form-select mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent" id="course_category">
-                            <option value="Finance">Finance</option>
-                            <option value="Management">Management</option>
-                            <option value="Marketing and Sales">Marketing and Sales</option>
-                            <option value="Personal Growth">Personal Growth</option>
-                            <option value="Customer Service">Customer Service</option>
-                            <option value="Funding">Funding</option>
-                            <option value="Entrepreneurship">Entrepreneurship</option>
+                            <option value="">Select a category</option>
+                            @foreach(['Finance', 'Management', 'Marketing and Sales', 'Personal Growth', 'Customer Service', 'Funding', 'Entrepreneurship'] as $category)
+                            <option value="{{ $category }}" {{ old('course_category') == $category? 'selected' : '' }}>{{ $category }}</option>
+                            @endforeach
                         </select>
+                        @error('course_category')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </label>
                 </div>
                 <br>
@@ -105,7 +105,7 @@
 
             </form>
 
-           
+
 
         </div>
 
